@@ -171,19 +171,17 @@ class Event < ActiveRecord::Base
   def extend_booking(time_s)
     time = time_s.to_i
     all_events = Event.find_all_by_instrument_id(self.instrument_id)
-    puts "all_events.length: #{all_events.length}"
     events_after = all_events.find_all do |e| 
-      puts "starts: #{self.start_at} -- #{e.start_at} :  #{datetime_less_than(self.start_at, e.start_at)}" 
+      #puts "starts: #{self.start_at} -- #{e.start_at} :  #{datetime_less_than(self.start_at, e.start_at)}" 
       datetime_less_than(self.start_at, e.start_at )
     end
-    puts "events_after.length: #{events_after.length}"
     events_after.sort! {|a,b| a.start_at <=> b.start_at }
     events_after.each {|e| puts e.start_at }
-    puts "time: #{time}"
-    ntime = time.to_f.hours - (events_after[0].start_at - self.end_at) 
-    puts "ntime: #{ntime}"
     changed = []
-    extend(ntime, events_after, changed) unless events_after.empty?
+    unless events_after.empty?
+      ntime = time.to_f.hours - (events_after[0].start_at - self.end_at) 
+      extend(ntime, events_after, changed)
+    end
     self.end_at += time.to_f.hours
     self.save(false)
     puts "self.end_at > #{self.end_at} \t #{time}"
