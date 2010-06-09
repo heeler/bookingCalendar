@@ -1,0 +1,7 @@
+#!/bin/sh
+/var/www/MSFCalendar/current/script/process/spawner \
+  mongrel \
+  --environment=production \
+  --instances=1 \
+  --address=127.0.0.1 \
+  --port=3004

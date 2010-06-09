@@ -1,3 +1,12 @@
 load 'deploy' if respond_to?(:namespace) # cap2 differentiator
 Dir['vendor/plugins/*/recipes/*.rb'].each { |plugin| load(plugin) }
 load 'config/deploy'
+
+after 'deploy:symlink', 'deploy:finishing_touches'
+
+namespace :deploy do
+   task :finishing_touches, :roles => :app do
+		run "rm -rf #{current_path}/vendor/plugins/open_id_authentication"
+		run "ln -s #{deploy_to}/shared/vendor/plugins/open_id_authentication #{current_path}/vendor/plugins/"
+  end
+end
