@@ -38,12 +38,12 @@
 
 = event_calendar()
 
-/ - weekly_calendar(@events, :date => @date, :include_24_hours => true) do |w| 
-/ 	- w.week(:business_hours => params[:business_hours]) do |event,truncate|  
-/ 		=  event.starts_at.strftime('%I:%M%p')  
-/ 		=  link_to truncate(event.user.username,truncate), instrument_event_path(@instrument, event)  
-/ 
-/ - weekly_links(:date => @date)
+-# - weekly_calendar(@events, :date => @date, :include_24_hours => true) do |w| 
+-# 	- w.week(:business_hours => params[:business_hours]) do |event,truncate|  
+-# 		=  event.starts_at.strftime('%I:%M%p')  
+-# 		=  link_to truncate(event.user.username,truncate), instrument_event_path(@instrument, event)  
+-# 
+-# - weekly_links(:date => @date)
 
 %br/
 

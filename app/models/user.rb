@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
     self.authorized = false
     self.admin = false 
     self.quota_multiplier = 1
+    self.color = "CC33FF"
   end
   
   

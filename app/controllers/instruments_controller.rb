@@ -17,8 +17,11 @@ class InstrumentsController < ApplicationController
   def show
     @instrument = Instrument.find(params[:id])
     @message = @instrument.messages.last
+
+    @month = params[:month].to_i if params[:month]
+    @year = params[:year].to_i if params[:year]
     
-    @month = @month || DateTime.now.month 
+    @month =  @month || DateTime.now.month 
     @year = @year || Time.now.year
     @shown_month = Date.civil(@year, @month)
     #@event_strips = Event.event_strips_for_month(@shown_month)
