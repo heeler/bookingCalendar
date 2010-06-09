@@ -1,2 +1,4 @@
 #!/bin/sh
-/etc/init.d/httpd restart
+
+#/etc/init.d/httpd restart
+
