@@ -1,9 +1,20 @@
 - form_for @user do |f| 
 	= f.error_messages 
+
+	%p
+		= f.label :openid_identifier, "OpenID URL (Optional)"
+		%br/
+		= f.text_field :openid_identifier
+		%br/
+		%br/
 	%p
 		= f.label :username 
 		%br/
 		= f.text_field :username
+	%p
+		= f.label :fullname
+		%br/
+		= f.text_field :fullname
 	%p
 		= f.label :email 
 		%br/
@@ -16,15 +27,8 @@
 		%p
 			= f.label :password_confirmation
 			%br/
-			= f.password_field :password_confirmation
-
-		%h2 Or use OpenID (optional)
-	%p
-		= f.label :openid_identifier, "OpenID URL"
-		%br/
-		= f.text_field :openid_identifier
-		
-		%h2 Choose a color for your bookings
+			= f.password_field :password_confirmation	
+	%h2 Choose a color for your bookings
 	%p
 		= f.label :color, "Click to select color"
 		%br/
