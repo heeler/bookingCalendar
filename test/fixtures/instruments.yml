@@ -1,23 +1,45 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-battlestar:
-  name: Battle Star
-  model: Q-Star Elite
-  description: machine 1
-  working: true
-  quota_hours: 4
 
-deathstar:
-  name: Death Star
-  model: Q-Star Elite
-  description: machine 2
-  working: true
-  quota_hours: 4
-  
-orbibrat:
-  name: Orbi Brat
-  model: Orbitrap
-  description: MS for ETC and HVC
+ltq_orbitrap:
+  name: LTQ-Orbitrap
+  model: Thermo Orbitrap
+  description: high mass accuracy / ETD. Priority for ETD and HCV 
   working: true
   quota_hours: 16
+
+ltq_ft:
+  name: LTQ-FT
+  model: Thermo LTQ-FT
+  description:  very high mass accuracy
+  working: true
+  quota_hours: 40
+  
+ltq:
+  name: LTQ-Andy
+  model: LTQ
+  description: unit mass accuracy
+  working: true
+  quota_hours: 40
+  
+qstar_elite:
+  name: QSTAR-Elite
+  model: QSTAR-Elite
+  description: Q-TOF 
+  working: true
+  quota_hours: 40  
+  
+qstar_pulsar:
+  name: QSTAR-Pulsar
+  model: QSTAR-Pulsar
+  description: Q-TOF 
+  working: true
+  quota_hours: 40  
+  
+akta:
+  name: AKTA
+  model: AKTA FPLC
+  description: FPLC / HPLC 
+  working: true
+  quota_hours: 40  
   

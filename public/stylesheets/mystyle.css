@@ -70,6 +70,15 @@
       color: blue; }
     #container #user_nav a:hover {
       background: yellow; }
+  #container #notice {
+    border-width: 1px;
+    border-style: solid;
+    background-color: #66FF99;
+    font-weight: bold;
+    text-align: left;
+    margin: 20px 10px 20px 10px;
+    padding: 7px;
+    width: 650px; }
   #container #page_content {
     padding-left: 0.5cm;
     padding-top: 1cm; }
@@ -85,6 +94,10 @@
         #container #page_content #instrument_table ul li {
           width: 4cm;
           float: left; }
+      #container #page_content #instrument_table hr {
+        width: 600px;
+        text-align: left;
+        margin: 0 auto 0 0; }
       #container #page_content #instrument_table instrument {
         display: block; }
         #container #page_content #instrument_table instrument ul {
@@ -125,7 +138,12 @@ a:hover {
   color: black; }
 
 .ec-month-nav {
-  padding-left: 0.5cm; }
+  padding-left: 0px;
+  text-align: center; }
+
+.ec-month-name {
+  padding-left: 0px;
+  text-align: center; }
 
 .ec-event-bg {
   background: gray; }
