@@ -1,0 +1,9 @@
+%h1 Editing event
+
+= render :partial => 'form'
+%br/
+= link_to 'Show', instrument_event_path(@instrument, @event)  
+= "|"
+= link_to 'Back', instrument_path(@instrument)
+= "|"
+= link_to 'Delete', instrument_event_path(@instrument, @event), :confirm => 'Are you sure?', :method => :delete

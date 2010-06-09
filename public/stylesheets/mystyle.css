@@ -1,0 +1,172 @@
+#myheader #banner {
+  text-align: left;
+  background-color: #666666;
+  height: 1cm;
+  margin: 2px; }
+  #myheader #banner #headermenu {
+    margin: 0;
+    padding: 0; }
+    #myheader #banner #headermenu a.top-line {
+      background-color: grey;
+      color: white;
+      font-family: serif;
+      font-size: 12px;
+      font-style: italic;
+      line-height: 12px;
+      padding: 1px 4px;
+      padding-left: 15px;
+      padding-right: 15px;
+      position: absolute;
+      text-decoration: none;
+      top: 46px;
+      vertical-align: middle; }
+      #myheader #banner #headermenu a.top-line hover {
+        color: yellow;
+        font-family: serif;
+        font-size: 12px;
+        font-style: italic;
+        line-height: 12px;
+        padding: 0 4px;
+        position: absolute;
+        top: 72px;
+        vertical-align: middle; }
+    #myheader #banner #headermenu #admin-event {
+      right: 50px;
+      top: 61px; }
+    #myheader #banner #headermenu #admin-user {
+      right: 50px; }
+    #myheader #banner #headermenu #dave {
+      right: 100px; }
+    #myheader #banner #headermenu #msf {
+      right: 150px; }
+    #myheader #banner #headermenu #home {
+      right: 200px; }
+#myheader #headerlist {
+  padding-left: 1cm;
+  background-color: #666666;
+  color: white;
+  display: inline;
+  font-size: 18pt; }
+#myheader #hr hr {
+  border: 0;
+  border-top: 1px solid #666666;
+  height: 0;
+  background: #666666;
+  padding: 0;
+  line-height: 2px;
+  margin-bottom: 2px;
+  margin-top: 6px; }
+
+#container {
+  text-align: left;
+  padding-top: 4px;
+  padding-left: 4px;
+  width: 750px; }
+  #container #user_nav {
+    padding-left: 2px;
+    text-align: left;
+    text-color: blue; }
+    #container #user_nav a {
+      color: blue; }
+    #container #user_nav a:hover {
+      background: yellow; }
+  #container #page_content {
+    padding-left: 0.5cm;
+    padding-top: 1cm; }
+    #container #page_content h1 {
+      text-align: left;
+      padding-left: 4cm; }
+    #container #page_content #instrument_table {
+      padding-left: 1cm;
+      display: block; }
+      #container #page_content #instrument_table ul {
+        display: block;
+        list-style-type: none; }
+        #container #page_content #instrument_table ul li {
+          width: 4cm;
+          float: left; }
+      #container #page_content #instrument_table instrument {
+        display: block; }
+        #container #page_content #instrument_table instrument ul {
+          list-style-type: none;
+          height: 1.4cm; }
+          #container #page_content #instrument_table instrument ul li {
+            width: 4cm;
+            float: left; }
+            #container #page_content #instrument_table instrument ul li img {
+              margin-left: 10px;
+              width: 20px;
+              height: 20px; }
+        #container #page_content #instrument_table instrument description {
+          padding-left: 2cm; }
+      #container #page_content #instrument_table week {
+        width: 750px; }
+    #container #page_content #add_booking {
+      display: block; }
+      #container #page_content #add_booking a:hover {
+        text-decoration: underline; }
+      #container #page_content #add_booking a {
+        text-decoration: none;
+        background: white;
+        color: black; }
+        #container #page_content #add_booking a img {
+          width: 20px;
+          background: white; }
+        #container #page_content #add_booking a img:hover {
+          background: white;
+          text-decoration: none; }
+
+a.ms-1-event-cal-txt {
+  font-family: serif;
+  font-size: 12px; }
+
+a:hover {
+  background-color: #2EAC6A;
+  color: black; }
+
+.ec-month-nav {
+  padding-left: 0.5cm; }
+
+.ec-event-bg {
+  background: gray; }
+
+.user_form {
+  position: relative;
+  height: 1.5cm; }
+
+.user_form_description {
+  position: relative;
+  height: 2.5cm; }
+
+.project {
+  position: absolute;
+  left: 1cm; }
+
+.project318 {
+  position: absolute;
+  left: 6cm;
+  width: 6cm; }
+
+.checkbox_holder {
+  display: inline-block;
+  width: 15px; }
+
+#add_comment {
+  position: relative;
+  margin-left: 160px; }
+  #add_comment img {
+    width: 400px; }
+  #add_comment a:hover {
+    background: black; }
+
+#first_comment {
+  background-color: #F3F3F3;
+  border: 1px dashed #AAAAAA;
+  position: relative;
+  margin-left: 160px;
+  padding: 5px;
+  width: 388px; }
+  #first_comment #name {
+    margin-left: 5cm; }
+  #first_comment #date {
+    margin-left: 5.2cm; }

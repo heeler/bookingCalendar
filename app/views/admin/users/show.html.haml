@@ -1,0 +1,13 @@
+%h2 Suspend Users
+        
+
+%h3 Authorized Users
+%ul
+	- for user in @unauthorized_users  
+		%li
+			= h user.username
+			= h user.email    
+			#del= link_to "S", admin_user(user.id)
+
+
+= link_to "Instrument Bookings", instruments_path

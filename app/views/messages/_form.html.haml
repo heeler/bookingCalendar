@@ -1,0 +1,10 @@
+- form_for(@message) do |f| 
+	= f.error_messages 
+	= hidden_field_tag	'message[user_id]', current_user.id
+	= hidden_field_tag	'message[instrument_id]', @instrument.id	
+	%p
+		= f.label :body 
+		%br 
+		= f.text_area :body
+	%p
+		= f.submit 'Create'

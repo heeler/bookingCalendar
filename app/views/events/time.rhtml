@@ -1,0 +1,7 @@
+<%- unless @dt.nil? %>
+	<%= hidden_field_tag  'event[start_at(1i)]', @dt.year %>
+	<%= hidden_field_tag  'event[start_at(2i)]', @dt.month %>
+	<%= hidden_field_tag  'event[start_at(3i)]', @dt.day %>
+	<%= hidden_field_tag  'event[start_at(4i)]', @dt.hour %>
+	<%= hidden_field_tag  'event[start_at(5i)]', @dt.min %>
+<%- end %>

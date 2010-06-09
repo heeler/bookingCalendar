@@ -1,0 +1,76 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+<% ctime = DateTime.now.in_time_zone('UTC').change(:min => 0) %>
+<% dtime = DateTime.now.beginning_of_day.in_time_zone('UTC') %>
+<% ttime = dtime + 24.hours %>
+# # time doesn't get converted the way it does normally you have to force in the 
+# # time in UTC because no conversion happens and the local time never gets converted to UTC otherwise
+# 
+one:
+  user: heeler 
+  instrument: deathstar
+  project: '320' 
+  project_pi: 'BURLINGAME'
+  description: <%= "dtime => #{dtime} \t ttime => #{ttime} \t ctime => #{ctime}" %>
+  start_at: <%= ctime %>
+  end_at: <%= ctime + 1.hours %>
+  approved: false
+  twoweekbooking: false
+
+two:
+  user: heeler
+  instrument: deathstar
+  project: '318'
+  project_pi: 'KROGAN' 
+  description: "20 samples for ms/ms from xxxx"
+  start_at: <%= ctime + 2.hours %>
+  end_at: <%= ctime + 3.hours %>
+  approved: false
+  twoweekbooking: false
+    
+three:
+  user: admin
+  instrument: deathstar
+  project: '321'
+  project_pi: 'BURLINGAME' 
+  al_approved: true
+  description: "20 samples for ms/ms from xxxx"
+  start_at: <%= dtime + 6.hours %>
+  end_at: <%= dtime + 8.hours %>
+  approved: false
+  twoweekbooking: false
+    
+four:
+  user: heeler
+  instrument: deathstar
+  project: '333' 
+  project_pi: 'BURLINGAME'   
+  al_approved: true
+  description: "20 samples for ms/ms from xxxx"
+  start_at: <%= dtime + 9.hours %>
+  end_at: <%= dtime + 11.hours %>
+  approved: false
+  twoweekbooking: false
+      
+five:
+  user: admin
+  instrument: deathstar
+  project: '333' 
+  project_pi: 'BURLINGAME'   
+  al_approved: true
+  description: "20 samples for ms/ms from xxxx"
+  start_at: <%= dtime + 12.hours %>
+  end_at: <%= dtime + 14.hours %>
+  approved: false
+  twoweekbooking: false
+    
+six:
+  user: heeler
+  instrument: deathstar
+  project: '333' 
+  project_pi: 'BURLINGAME'   
+  al_approved: true
+  description: "20 samples for ms/ms from xxxx"
+  start_at: <%= ttime + 8.hours %>
+  end_at: <%= ttime + 10.hours %>
+  approved: false
+  twoweekbooking: false

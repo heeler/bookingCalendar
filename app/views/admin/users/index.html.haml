@@ -1,0 +1,25 @@
+
+
+- form_tag authorize_admin_users_path, :method => :put do   
+	%h1 Users Awaiting Authorization
+	%ul
+		- for user in @unauthorized_users  
+			%li
+				= check_box_tag "user_ids[]", user.id
+				= h user.username
+				= h user.email  
+		= submit_tag "submit" 
+%h1 Authorized Users
+%ul
+	- for user in @authorized_users  
+		%li
+			%span
+				= link_to "S", admin_user_path(user.id), :method => :put
+				= h user.username
+				= h user.email  
+					
+                  
+
+= link_to "Instrument Bookings", instruments_path
+        
+

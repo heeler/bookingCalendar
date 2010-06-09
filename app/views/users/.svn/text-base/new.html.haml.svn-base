@@ -1,0 +1,4 @@
+%title "Login" 
+
+= render :partial => 'form' 
+

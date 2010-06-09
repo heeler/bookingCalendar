@@ -1,0 +1,5 @@
+Hi <%= h @event.user.username %>,
+	You have reserved <%= h @event.instrument.name %> on <%= @event.start_at.strftime("%a %D at %R")%> for <%= @event.duration %> hours.
+Please talk to Dave if you have any questions. 
+Thanks,
+    Automated booking system mailer

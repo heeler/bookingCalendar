@@ -1,0 +1,53 @@
+
+#instrument_table
+	%ul
+		%li Name
+		%li Model
+		%li Status
+		%li Description
+		%br/
+
+	%instrument
+		%ul
+			%li=h @instrument.name
+			%li=h @instrument.model
+			%li= image_tag(img_name(@instrument), :border => 0)
+			%li=h @instrument.description
+			- if admin?
+				%d= link_to 'Edit', edit_instrument_path(@instrument) 
+				%d= link_to 'Destroy', instrument_path(@instrument), :confirm => 'Are you sure?', :method => :delete 
+
+
+- if authorized? && @instrument.working
+	#add_comment
+		= link_to image_tag('newalertbanner.png'), new_instrument_message_path(@instrument)
+	-unless @message.nil?
+		#first_comment
+			= "Alert: "
+			%br
+			= @message.body
+			#name= "--" + @message.user.fullname
+			#date= @message.created_at.strftime("%a %D at %R")
+	#add_booking
+		= link_to image_tag("add.png", :border => 0), new_instrument_event_path(@instrument)
+		= link_to 'Add Booking', new_instrument_event_path(@instrument)
+		- if admin?
+			= " | "
+			= link_to 'Review Bookings', instrument_events_path(@instrument)
+
+
+= event_calendar()
+
+/ - weekly_calendar(@events, :date => @date, :include_24_hours => true) do |w| 
+/ 	- w.week(:business_hours => params[:business_hours]) do |event,truncate|  
+/ 		=  event.starts_at.strftime('%I:%M%p')  
+/ 		=  link_to truncate(event.user.username,truncate), instrument_event_path(@instrument, event)  
+/ 
+/ - weekly_links(:date => @date)
+
+%br/
+
+#new_booking
+	=" "
+
+

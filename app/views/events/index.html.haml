@@ -1,0 +1,40 @@
+%ul
+	=h "Username"
+	=h "Inst Name"
+	=h "Project ID"
+	=h "Starts"
+	- form_tag approve_instrument_events_path, :method => :put do
+		- for event in @pending_events
+			%li
+				= check_box_tag "event_ids[]", event.id
+				=h event.user.username
+				=h event.instrument.name
+				=h event.project
+				=h event.start_at
+				=h event.duration
+		= submit_tag "Approve"
+
+%ul
+- for event in @approved_events
+	%li
+		=h event.user.username
+		=h event.instrument.name
+		=h event.project
+		=h event.start_at
+		=h event.duration
+		
+= link_to "Instrument Page", instruments_path
+	
+-#%table
+-#	%tr
+-#		%th User
+-#		%th Instrument
+-#		%th Project
+-#		%th Description
+-#		%th Starts at
+-#		%th Ends at
+  
+
+-#		%cd= link_to 'Destroy', instrument_event_path(event.instrument, event), :confirm => 'Are you sure?', :method => :delete 
+
+  

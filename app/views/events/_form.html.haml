@@ -1,0 +1,39 @@
+- form_for([@instrument, @event]) do |f| 
+	= f.error_messages 
+	= hidden_field_tag  'event[user_id]', current_user.id
+	= hidden_field_tag 'event[approved]', false
+	.user_form
+		.project
+			= f.label "Project #"
+			%br/
+			= f.text_field :project, :size => 15
+		.project318
+			= f.label :project_pi, "Project P.I." 
+			%br/
+			= f.text_field :project_pi, :value => ((@event.project_pi) ? @event.project_pi : "BURLINGAME" )
+			- if not_already_checked(@event)
+				= f.check_box :al_approved
+				= f.label :al_approved, "Burlingame Approved"
+				%br/
+				= " and Project Request Form submitted?"
+	.user_form_description
+		.project
+			= f.label :description 
+			%br/
+			= f.text_area :description, :cols => 50, :rows => 3
+	.user_form		
+		.project
+			= f.label :start_at
+			%br/
+			/ = f.text_field :start_at
+			= f.datetime_select(:start_at, :minute_step => 15)
+	.user_form
+		.project
+			= f.label :duration
+			%br/
+			= f.select :duration,  options_for_select(possible_duration)
+	%br/
+			
+	= f.submit 'Create / Update'
+
+	

@@ -1,0 +1,129 @@
+10
+
+dir
+66
+file:///svn/cpprepos/trunk/rails/msbookingcalendar
+file:///svn/cpprepos
+
+
+
+2009-11-11T10:25:14.944832Z
+66
+jsherman
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+308c566f-a5a7-4cda-8233-d0cb2f6d469f
+
+test
+dir
+
+app
+dir
+
+tmp
+dir
+
+log
+dir
+
+Rakefile
+file
+
+
+
+
+2009-11-11T10:46:22.000000Z
+17f2f134da4cd31ea095d5868ca89e86
+2009-11-11T10:25:14.944832Z
+66
+jsherman
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+307
+
+script
+dir
+
+config
+dir
+
+db
+dir
+
+doc
+dir
+
+lib
+dir
+
+vendor
+dir
+
+README
+file
+
+
+
+
+2009-11-11T10:46:22.000000Z
+a58e68a7599c976f071d5b9c6fa67fb3
+2009-11-11T10:25:14.944832Z
+66
+jsherman
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10011
+
+public
+dir
+

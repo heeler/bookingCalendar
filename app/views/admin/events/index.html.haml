@@ -1,0 +1,18 @@
+
+- form_tag approve_admin_events_path, :method => :put do   
+	%h1 Events Awaiting Approval
+	%ul
+		- for inst in @instruments
+			%li=h "Instrument #{inst.name} [#{inst.model}]"
+			-for event in inst.events.starting_after(DateTime.now)
+				%li
+					%span
+						.checkbox_holder
+							= check_box_tag "event_ids[]", event.id unless event.approved
+						= h event.user.username
+						= h event.start_at.strftime("%c")
+						= h " for #{event.duration/3600} hours. "
+						= link_to "[Delete]", admin_event_path(event), :method => :delete 
+		= submit_tag "submit"               
+
+= link_to "Instrument Bookings", instruments_path

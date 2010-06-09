@@ -1,0 +1,9 @@
+/ - form_for([@instrument, @event], extend_instrument_event_path(@instrument.id,@event.id) ) do |f| 
+- form_for([@instrument, @event], :url => {:action => 'extend'}) do |f| 
+	= f.error_messages 
+	%p
+		= f.label :extend
+		%br/
+		= f.select :duration,  options_for_select(possible_extention)
+			
+	%p= f.submit 'Extend Booking'

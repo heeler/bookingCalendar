@@ -1,0 +1,41 @@
+%p
+	%b User:
+	=h @event.user.username
+%p	
+	%b Full Name:
+	=h @event.user.fullname
+%p
+	%b Instrument:
+	=h @event.instrument.name 
+%p
+	%b Project #:
+	=h @event.project 
+%p
+	%b Project PI:
+	=h @event.project_pi
+%p
+	%b Description:
+	=h @event.description 
+%p
+	%b Starts at:
+	=h @event.start_at 
+%p
+	%b Ends at:
+	=h @event.end_at  
+%p
+	%b Status:
+	= pending(@event)
+
+
+
+= link_to 'Back', instrument_path(@instrument) 
+- if( authorized_to_edit?(@event.user.id) )   
+	= "|"
+	= link_to 'Edit', edit_instrument_event_path(@instrument,@event) 
+	= "|"
+	= link_to 'Delete', instrument_event_path(@instrument, @event), :confirm => 'Are you sure?', :method => :delete
+	- if( @event.in_progress? )
+		%br
+		%br
+		%br
+		= render :partial => 'extend' if @event.in_progress? 

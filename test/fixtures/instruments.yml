@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+battlestar:
+  name: Battle Star
+  model: Q-Star Elite
+  description: machine 1
+  working: true
+  quota_hours: 4
+
+deathstar:
+  name: Death Star
+  model: Q-Star Elite
+  description: machine 2
+  working: true
+  quota_hours: 4
+  
+orbibrat:
+  name: Orbi Brat
+  model: Orbitrap
+  description: MS for ETC and HVC
+  working: true
+  quota_hours: 16
+  
