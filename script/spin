@@ -1,5 +1,5 @@
 #!/bin/sh
-/var/www/MSFCalendar/current/script/process/spawner \
+/webapps/www/MSFCalendar/current/script/process/spawner \
   mongrel \
   --environment=production \
   --instances=1 \
