@@ -1,6 +1,6 @@
 Hi <%= h @event.user.username %>,
 	You're booking on <%= h @event.instrument.name %> has been modified, 
-and is now at <%= @event.start_at.strftime("%a %D at %R")%> for <%= @event.duration %> hours.
+and is now at <%= @event.start_at.strftime("%a %D at %R")%> for <%= @event.duration/3600.00 %> hours.
 Please talk to Dave if you have any questions. 
 Thanks,
     Automated booking system mailer

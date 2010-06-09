@@ -52,6 +52,16 @@ class EventsController < ApplicationController
   def create
     @instrument = Instrument.find(params[:instrument_id])
     @event = @instrument.events.new(params[:event])
+    
+    unless params[:event].has_key?("start_at(1i)")
+      time = Time.parse(params[:my_start_at])
+      params[:event]["start_at(1i)"] = time.year 
+    	params[:event]["start_at(2i)"] = time.month
+    	params[:event]["start_at(3i)"] = time.day 
+    	params[:event]["start_at(4i)"] = time.hour 
+    	params[:event]["start_at(5i)"] = time.min 
+    end
+    
     @event.assign_duration(params[:event])
     
     respond_to do |format|
@@ -138,6 +148,7 @@ class EventsController < ApplicationController
   
   private
   
+
   def check_authorized
     redirect_to instruments_path unless authorized_user
   end

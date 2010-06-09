@@ -53,6 +53,12 @@ module EventsHelper
     res
   end
   
+  def default_time
+    time = possible_blocks.shift
+    @dt = time[1]
+  end
+  
+  
   def orbi_duration(dt)
     if dt.nil?
       dt = possible_blocks.shift

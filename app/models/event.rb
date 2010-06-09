@@ -17,7 +17,9 @@ class Event < ActiveRecord::Base
   def assign_duration(event)
     mtime = Time.local(event["start_at(1i)"].to_i, event["start_at(2i)"].to_i, 
                                  event["start_at(3i)"].to_i,
-                                 event["start_at(4i)"].to_i, event["start_at(5i)"].to_i )
+                                 event["start_at(4i)"].to_i, 
+                                 event["start_at(5i)"].to_i ) 
+
     self.start_at = mtime
     self.end_at = mtime + event[:duration].to_i.hours
   end
