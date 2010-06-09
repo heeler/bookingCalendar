@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_create :set_defaults
+  
   has_many :messages
   has_many :events
   has_many :instruments, :through => :events
@@ -13,6 +15,14 @@ class User < ActiveRecord::Base
   end
   
   private 
+  
+  def set_defaults
+    self.openid_identifier = ""
+    self.authorized = false
+    self.admin = false 
+    self.quota_multiplier = 1
+  end
+  
   
   def map_openid_registration(registration)
     puts registration
