@@ -11,4 +11,19 @@ namespace :deploy do
 		run "rm -rf #{current_path}/db/production.sqlite3"
 		run "ln -s #{deploy_to}/shared/system/production.sqlite3 #{current_path}/db/"
   end
+
+	 task :start, :roles => :app do
+	   run "touch #{current_release}/tmp/restart.txt"
+	 end
+
+	 task :stop, :roles => :app do
+	   # Do nothing.
+	 end
+
+	 desc "Restart Application"
+	 task :restart, :roles => :app do
+	   run "touch #{current_release}/tmp/restart.txt"
+	 end
+
+
 end
