@@ -6,11 +6,11 @@ class CreateEvents < ActiveRecord::Migration
       t.string   :project
       t.string   :project_pi
       t.boolean  :al_approved
-      t.boolean  :twoweekbooking
+      t.boolean  :twoweekbooking, :default => 0
       t.text     :description
       t.datetime :start_at
       t.datetime :end_at
-      t.boolean  :approved
+      t.boolean  :approved, :default => 0
 
       t.timestamps
     end

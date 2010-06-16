@@ -2,6 +2,7 @@
 
 
 ltq_orbitrap:
+  id: 1
   name: LTQ-Orbitrap
   model: Thermo Orbitrap
   description: high mass accuracy / ETD. Priority for ETD and HCV 
@@ -9,6 +10,7 @@ ltq_orbitrap:
   quota_hours: 16
 
 ltq_ft:
+  id: 3
   name: LTQ-FT
   model: Thermo LTQ-FT
   description:  very high mass accuracy
@@ -16,6 +18,7 @@ ltq_ft:
   quota_hours: 40
   
 ltq:
+  id: 5
   name: LTQ-Andy
   model: LTQ
   description: unit mass accuracy
@@ -23,6 +26,7 @@ ltq:
   quota_hours: 40
   
 qstar_elite:
+  id: 7
   name: QSTAR-Elite
   model: QSTAR-Elite
   description: Q-TOF 
@@ -30,6 +34,7 @@ qstar_elite:
   quota_hours: 40  
   
 qstar_pulsar:
+  id: 9
   name: QSTAR-Pulsar
   model: QSTAR-Pulsar
   description: Q-TOF 
@@ -37,6 +42,7 @@ qstar_pulsar:
   quota_hours: 40  
   
 destr:
+  id: 13
   name: deSTR-MALDI
   model: MALDI-TOF
   description: Quick MALDI analysis instrument
@@ -44,6 +50,7 @@ destr:
   quota_hours: 40
     
 akta:
+  id: 17
   name: AKTA
   model: AKTA FPLC
   description: FPLC / HPLC 
