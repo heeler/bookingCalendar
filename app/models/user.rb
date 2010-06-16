@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-  before_create :set_defaults
   
   has_many :messages
   has_many :events

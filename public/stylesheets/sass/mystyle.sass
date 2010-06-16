@@ -90,7 +90,7 @@
 
 #container
 	:text-align left
-	:padding-top 4px
+	:padding-top 2px
 	:padding-left 4px
 	:width 750px
 
@@ -101,13 +101,25 @@
 
 		a
 			:color blue
-		a:hover
+		&:hover
 			:background yellow
+		&:visited
+			:color blue
 	
 	#notice
 		:border-width 1px
 		:border-style solid
 		:background-color #66FF99
+		:font-weight bold
+		:text-align left
+		:margin 20px 10px 20px 10px
+		:padding 7px
+		:width 650px
+		
+	#error
+		:border-width 1px
+		:border-style solid
+		:background-color #FF4040
 		:font-weight bold
 		:text-align left
 		:margin 20px 10px 20px 10px
@@ -184,10 +196,11 @@ a:hover
 	:background-color #2EAC6A
 	:color black
 		
-
 .ec-month-nav
 	:padding-left 0px
 	:text-align center
+	a:visited
+		:color black
 
 .ec-month-name
 	:padding-left 0px
