@@ -21,7 +21,6 @@
       top: 46px;
       vertical-align: middle; }
       #myheader #banner #headermenu a.top-line hover {
-        color: yellow;
         font-family: serif;
         font-size: 12px;
         font-style: italic;
@@ -85,8 +84,6 @@
     text-color: blue; }
     #container #user_nav a {
       color: blue; }
-    #container #user_nav:hover {
-      background: yellow; }
     #container #user_nav:visited {
       color: blue; }
   #container #notice {
