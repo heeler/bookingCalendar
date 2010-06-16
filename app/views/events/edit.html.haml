@@ -1,6 +1,10 @@
 %h1 Editing event
 
-= render :partial => 'form'
+- if @instrument.orbitrap
+	= render :partial => 'orbi_form'
+- else
+	= render :partial => 'form'
+
 %br/
 = link_to 'Show', instrument_event_path(@instrument, @event)  
 = "|"

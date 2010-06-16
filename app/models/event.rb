@@ -203,6 +203,7 @@ class Event < ActiveRecord::Base
   end
 
   def overlap?( event )
+    return false if event.id == self.id
     dstart = self.start_at.to_datetime.in_time_zone
     dend = self.end_at.to_datetime.in_time_zone
     return false if datetime_less_than( dend, event.start_at.in_time_zone )

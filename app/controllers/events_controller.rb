@@ -1,6 +1,7 @@
 class EventsController < ApplicationController           
   before_filter :logged_in
   before_filter :check_authorized, :except => [:index]
+  before_filter :my_time_to_event_time, :only => [:create, :update]
   # GET /events
   # GET /events.xml
   def index
@@ -50,20 +51,9 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    @instrument = Instrument.find(params[:instrument_id])
+    @instrument = Instrument.find(params[:instrument_id])    
     @event = @instrument.events.new(params[:event])
-    
-    unless params[:event].has_key?("start_at(1i)")
-      time = Time.parse(params[:my_start_at])
-      params[:event]["start_at(1i)"] = time.year 
-    	params[:event]["start_at(2i)"] = time.month
-    	params[:event]["start_at(3i)"] = time.day 
-    	params[:event]["start_at(4i)"] = time.hour 
-    	params[:event]["start_at(5i)"] = time.min 
-    end
-    
     @event.assign_duration(params[:event])
-    
     respond_to do |format|
       if @event.save
         flash[:notice] = 'Event was successfully created.'
@@ -81,20 +71,21 @@ class EventsController < ApplicationController
   # PUT /events/1.xml
   def update
     @instrument = Instrument.find(params[:instrument_id])
-    event = @instrument.events.find(params[:id])
-    dupoldevent = Event.new(event.attributes)
-    event.destroy
-    @event = @instrument.events.new(params[:event])
-    @event.assign_duration(params[:event])
-
+    @event = Event.find(params[:id])
+    # puts "AEVENT ID: #{event.id}"
+    # dupoldevent = Event.new(event.attributes)
+    # event.destroy
+    # @event = @instrument.events.new(params[:event])
+    # puts "BEVENT ID: #{@event.id}"    
+    # @event.assign_duration(params[:event])
     respond_to do |format|
-      if @event.save 
+      if @event.update_attributes(params[:event]) 
         flash[:notice] = 'Event was successfully updated.'
         Notifier.deliver_booking_modification(@event)
         format.html { redirect_to instrument_path(@instrument) }
         format.xml  { head :ok }
       else
-        dupoldevent.save
+        # dupoldevent.save
         flash[:error] = 'conflict unable to move your booking to your desired time'
         format.html { redirect_to instrument_path(@instrument) }
         format.xml  { render :xml => @event.errors, :status => :unprocessable_entity }
@@ -148,6 +139,16 @@ class EventsController < ApplicationController
   
   private
   
+  def my_time_to_event_time
+    unless params[:event].has_key?("start_at(1i)")
+      time = Time.parse(params[:my_start_at])
+      params[:event]["start_at(1i)"] = time.year.to_s 
+    	params[:event]["start_at(2i)"] = time.month.to_s
+    	params[:event]["start_at(3i)"] = time.day.to_s
+    	params[:event]["start_at(4i)"] = time.hour.to_s
+    	params[:event]["start_at(5i)"] = time.min.to_s
+    end
+  end
 
   def check_authorized
     redirect_to instruments_path unless authorized_user

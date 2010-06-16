@@ -36,10 +36,18 @@ qstar_pulsar:
   working: true
   quota_hours: 40  
   
+destr:
+  name: deSTR-MALDI
+  model: MALDI-TOF
+  description: Quick MALDI analysis instrument
+  working: false
+  quota_hours: 40
+    
 akta:
   name: AKTA
   model: AKTA FPLC
   description: FPLC / HPLC 
   working: true
   quota_hours: 40  
+  
   

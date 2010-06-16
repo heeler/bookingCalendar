@@ -33,7 +33,7 @@ module EventsHelper
   def possible_blocks
     time = Time.now.at_midnight
     res = {}
-    0.upto(13) do |day|
+    0.upto(29) do |day|
       dt = time + day.days
       case dt.to_date.cwday
       when 1..4

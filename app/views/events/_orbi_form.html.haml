@@ -5,14 +5,15 @@
 	#hidden_time
 	.user_form
 		.project
-			= f.label "Project #"
+			= f.label :project, "Project #"
 			%br/
 			= f.text_field :project, :size => 15
 		.project318
 			= f.label :project_pi, "Project P.I." 
 			%br/
 			= f.text_field :project_pi, :value => ((@event.project_pi) ? @event.project_pi : "BURLINGAME" )
-			- if not_already_checked(@event)
+		- if not_already_checked(@event)
+			.project318
 				= f.check_box :al_approved
 				= f.label :al_approved, "Burlingame Approved"
 				%br/
@@ -22,19 +23,23 @@
 			= f.label :description 
 			%br/
 			= f.text_area :description, :cols => 50, :rows => 3
-	.user_form		
+	.user_form
 		.project
 			= f.label :start_at
 			%br/
 			= select_tag :my_start_at,  options_for_select(possible_blocks)
 			-# f.datetime_select(:start_at, :minute_step => 15)
-			= observe_field "my_start_at", :update => "event_duration", :with => "time", :url => {:controller => :events, :action => :duration}
-			= observe_field "my_start_at", :update => "hidden_time", :with => "time", :url => {:controller => :events, :action => :time}
+			= observe_field "my_start_at", :update => "event_duration", :with => "time", :url => {:controller => :events, :action => :duration}, :method => :get
+			= observe_field "my_start_at", :update => "hidden_time", :with => "time", :url => {:controller => :events, :action => :time}, :method => :get
 	.user_form
 		.project
 			= f.label :duration
 			%br/
 			= f.select :duration,  options_for_select(orbi_duration(nil))
+		.project318
+			= f.label :etd, "ETD required?"
+			%br/
+			= f.check_box :etd
 	%br/
 			
 	= f.submit 'Create / Update'

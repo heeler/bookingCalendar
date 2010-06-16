@@ -7,11 +7,11 @@ class CreateUsers < ActiveRecord::Migration
       t.string :crypted_password
       t.string :password_salt
       t.string :persistence_token
-      t.string :openid_identifier
-      t.boolean :admin
-      t.boolean :authorized
-      t.string :color
-      t.float :quota_multiplier
+      t.string :openid_identifier, :default => ""
+      t.boolean :admin, :default => 0
+      t.boolean :authorized, :default => 0
+      t.string :color, :default => "CC33FF"
+      t.float :quota_multiplier, :default => 1.0
       t.timestamps
     end
   end
