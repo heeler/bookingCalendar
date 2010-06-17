@@ -21,7 +21,8 @@
 		.form_right
 			= f.label :openid_identifier, "OpenID URL (Optional)"
 			%br/
-			= f.text_field :openid_identifier, :value => ((@user.openid_identifier.empty?) ?  "https://www.google.com/accounts/o8/id" : @user.openid_identifier )
+			= f.text_field :openid_identifier
+			.tiny= "https://www.google.com/accounts/o8/id"
 	.user_form
 		.form_left
 			= f.label :fullname
