@@ -164,6 +164,9 @@ a:hover {
   background-color: #2EAC6A;
   color: black; }
 
+a:visited {
+  color: black; }
+
 .ec-month-nav {
   padding-left: 0px;
   text-align: center; }
