@@ -36,7 +36,6 @@
 			= f.text_field :email 
 		.form_right
 			= "If you wish to authenticate via your Google account please also populate the Username, Fullname, and Email fields to the left."
-			= "https://www.google.com/accounts/o8/id"
 			
 	- if @user.openid_identifier.blank?
 		.user_form
