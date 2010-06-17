@@ -4,20 +4,6 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-#  before_filter :init_time_zone
-  
-  # def init_time_zone
-  #   @time_zone = ActiveSupport::TimeZone[session[:time_zone_name]] if session[:time_zone_name]
-  #   Time.zone = @time_zone.name if @time_zone
-  # end
-  # 
-  # def time_zone
-  #   offset_seconds = params[:offset_minutes].to_i * 60
-  #   @time_zone = ActiveSupport::TimeZone[offset_seconds]
-  #   @time_zone = ActiveSupport::TimeZone["Pacific Time (US & Canada)"] unless @time_zone
-  #   session[:time_zone_name] = @time_zone.name if @time_zone
-  #   render :text => "success"
-  # end
   
   
   # Scrub sensitive parameters from your log

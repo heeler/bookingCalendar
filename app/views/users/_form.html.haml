@@ -1,36 +1,48 @@
 - form_for @user do |f| 
 	= f.error_messages 
-	%p
-		= f.label :openid_identifier, "OpenID URL (Optional)"
-		%br/
-		= f.text_field :openid_identifier
-		%br/
-		%br/
-	%p
-		= f.label :username 
-		%br/
-		= f.text_field :username
-	%p
-		= f.label :fullname
-		%br/
-		= f.text_field :fullname
-	%p
-		= f.label :email 
-		%br/
-		= f.text_field :email 
+
+	.user_form
+		.form_left
+			= f.label :color, "Click to choose your calendar color."
+			%br/
+			= f.text_field :color, :class => 'color'	
+	.user_form
+		.form_left
+			= f.label :username 
+			%br/
+			= f.text_field :username
+		.form_right
+			= f.label :openid_identifier, "OpenID URL (Optional)"
+			%br/
+			= f.text_field :openid_identifier, :value => ((@user.openid_identifier.empty?) ?  "https://www.google.com/accounts/o8/id" : @user.openid_identifier )
+	.user_form
+		.form_left
+			= f.label :fullname
+			%br/
+			= f.text_field :fullname
+		.form_right
+			= f.submit "Submit"
+	.user_form
+		.form_left
+			= f.label :email 
+			%br/
+			= f.text_field :email 
+		.form_right
+			= "If you wish to authenticate via your Google account please also populate the Username, Fullname, and Email fields to the left."
+			= "https://www.google.com/accounts/o8/id"
+			
 	- if @user.openid_identifier.blank?
-		%p
-			= f.label :password 
-			%br/
-			= f.password_field :password
-		%p
-			= f.label :password_confirmation
-			%br/
-			= f.password_field :password_confirmation	
-	%h2 Choose a color for your bookings
-	%p
-		= f.label :color, "Click to select color"
-		%br/
-		= f.text_field :color, :class => 'color'
-		
-	%p= f.submit "Submit"
+		.user_form
+			.form_left
+				= f.label :password 
+				%br/
+				= f.password_field :password
+		.user_form
+			.form_left
+				= f.label :password_confirmation
+				%br/
+				= f.password_field :password_confirmation	
+
+	.user_form
+		.form_left
+			= f.submit "Submit"

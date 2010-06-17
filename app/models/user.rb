@@ -15,19 +15,10 @@ class User < ActiveRecord::Base
   
   private 
   
-  def set_defaults
-    self.openid_identifier = ""
-    self.authorized = false
-    self.admin = false 
-    self.quota_multiplier = 1
-    self.color = "CC33FF"
-  end
-  
-  
   def map_openid_registration(registration)
-    puts registration
     self.email = registration["email"] if email.blank?
     self.username = registration["nickname"] if username.blank?
     self.username = registration["fullname"] if username.blank?    
+    self.fullname = registration["fullname"] if fullname.blank?
   end
 end

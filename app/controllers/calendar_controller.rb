@@ -7,7 +7,7 @@ class CalendarController < ApplicationController
     @shown_month = Date.civil(@year, @month)
 
     @event_strips = Event.event_strips_for_month(@shown_month)
-    puts "NUMBER OF EVENTS >> "
+
   end
   
 end
