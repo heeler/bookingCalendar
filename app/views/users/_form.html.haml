@@ -3,6 +3,13 @@
 
 	.user_form
 		.form_left
+			%h2= "Username/Password"
+			.tiny= "Fill out this side to make a local account."
+		.form_right
+			%h2= "OpenID"
+			.tiny= "Use this side if you don't want to have to remember another password and you have an OpenID account (you probably do)."
+	.user_form
+		.form_left
 			= f.label :color, "Click to choose your calendar color."
 			%br/
 			= f.text_field :color, :class => 'color'	
