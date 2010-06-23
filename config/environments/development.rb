@@ -23,12 +23,4 @@ config.action_mailer.delivery_method = :test
 #config.action_mailer.delivery_method = :smtp
 
 # these options are only needed if you choose smtp delivery
-config.action_mailer.smtp_settings = {
-  :enable_starttls_auto => true,
-  :address        => "smtp.gmail.com",
-  :port           => "587",
-  :authentication => :plain,
-  :user_name      => "jamie.sherman",
-  :password       => "Gmail;Taz",
-  :domain         => "cgl.ucsf.edu"
-}
+

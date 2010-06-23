@@ -25,7 +25,7 @@ config.action_mailer.smtp_settings = {
   :port           => "587",
   :authentication => :plain,
   :user_name      => "jamie.sherman",
-  :password       => "Gmail;Taz",
+  :password       => "Gmail;Mar",
   :domain         => "cgl.ucsf.edu"
 }
 
