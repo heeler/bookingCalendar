@@ -1,25 +1,34 @@
 
 
 - form_tag authorize_admin_users_path, :method => :put do   
-	%h1 Users Awaiting Authorization
-	%ul
-		- for user in @unauthorized_users  
-			%li
-				= check_box_tag "user_ids[]", user.id
-				= h user.username
-				= h user.email  
-		= submit_tag "submit" 
-%h1 Authorized Users
-%ul
-	- for user in @authorized_users  
-		%li
-			%span
-				= link_to "S", admin_user_path(user.id), :method => :put
-				= h user.username
-				= h user.email  
-					
-                  
+	%h1 
+		Users Awaiting Authorization
 
+	%table.adminUser
+		%tfoot
+			%tr
+				%td= submit_tag "submit"
+		%tbody
+		- for user in @unauthorized_users  
+			%tr
+				%td.checkbox= check_box_tag "user_ids[]", user.id
+				%td.username= h user.username
+				%td.fullname= h user.fullname
+				%td.email= h user.email  
+	
+%h1 
+	Authorized Users
+
+%table.adminUser
+	%tbody
+	- for user in @authorized_users  
+		%tr
+			%td.checkbox= link_to "S", admin_user_path(user.id), :method => :put, :class => "checkbox"
+			%td.username= h user.username
+			%td.fullname= h user.fullname
+			%td.email= h user.email  
+					
+%br/                  
 = link_to "Instrument Bookings", instruments_path
         
 
