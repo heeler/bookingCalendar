@@ -6,6 +6,7 @@
 	- for user in @unauthorized_users  
 		%li
 			= h user.username
+			= h user.fullname
 			= h user.email    
 			#del= link_to "S", admin_user(user.id)
 
