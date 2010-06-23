@@ -208,6 +208,10 @@ a:visited {
     font-size: 14pt; }
   .user_form .tiny {
     font-size: 8pt; }
+  .user_form #user_session_submit {
+    width: 500px; }
+  .user_form #user_submit {
+    width: 500px; }
 
 .user_form_description {
   position: relative;
