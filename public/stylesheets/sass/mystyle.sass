@@ -137,33 +137,44 @@
 			
 
 		
-		#instrument_table
-			:padding-left 1cm
-			:display block
-			ul
-				:display block
-				:list-style-type none
+		table.instruments
+			:border collapse
+			:width 700px
+			:border 1px solid green
+			:margin-bottom 40px
+				
+			.standard
+				:width 200px
+			.status
+				:width 50px
+			thead
+				:background-color #2EAC6A
+				:color white
+				th
+					:font-weight bold
+					:padding 5px
+						
+			tbody
+				:border 1px solid green
 			
-				li
-					:width 4cm
-					:float left
-			hr
-				:width 600px
-				:text-align left
-				:margin 0 auto 0 0 
-			
-			instrument
-				:display block
-				ul
-					:list-style-type none
-					:height 1.4cm
-					li
-						:width 4cm
-						:float left
+				.alt
+					:background #CCFFCC
+				
+				tr.instrument
+					:border 1px solid green
+								
+					th
+						
+					
+					td, th
+						:heigh 100px
+						:border 1px solid green
+						:padding 5px
+						
 						img
-							:margin-left 10px
-							:width 30px
-							:height 30px
+							:width 40px
+							:margin-left 5px
+
 					
 				description
 					:padding-left 2cm
@@ -293,6 +304,7 @@ a:visited
 	
 #add_comment
 	:position relative
+	:margin-bottom 40px
 	:margin-left 160px
 
 	img

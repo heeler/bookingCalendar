@@ -112,34 +112,37 @@
     #container #page_content h1 {
       text-align: left;
       padding-left: 4cm; }
-    #container #page_content #instrument_table {
-      padding-left: 1cm;
-      display: block; }
-      #container #page_content #instrument_table ul {
-        display: block;
-        list-style-type: none; }
-        #container #page_content #instrument_table ul li {
-          width: 4cm;
-          float: left; }
-      #container #page_content #instrument_table hr {
-        width: 600px;
-        text-align: left;
-        margin: 0 auto 0 0; }
-      #container #page_content #instrument_table instrument {
-        display: block; }
-        #container #page_content #instrument_table instrument ul {
-          list-style-type: none;
-          height: 1.4cm; }
-          #container #page_content #instrument_table instrument ul li {
-            width: 4cm;
-            float: left; }
-            #container #page_content #instrument_table instrument ul li img {
-              margin-left: 10px;
-              width: 30px;
-              height: 30px; }
-        #container #page_content #instrument_table instrument description {
+    #container #page_content table.instruments {
+      border: collapse;
+      width: 700px;
+      border: 1px solid green;
+      margin-bottom: 40px; }
+      #container #page_content table.instruments .standard {
+        width: 200px; }
+      #container #page_content table.instruments .status {
+        width: 50px; }
+      #container #page_content table.instruments thead {
+        background-color: #2EAC6A;
+        color: white; }
+        #container #page_content table.instruments thead th {
+          font-weight: bold;
+          padding: 5px; }
+      #container #page_content table.instruments tbody {
+        border: 1px solid green; }
+        #container #page_content table.instruments tbody .alt {
+          background: #CCFFCC; }
+        #container #page_content table.instruments tbody tr.instrument {
+          border: 1px solid green; }
+          #container #page_content table.instruments tbody tr.instrument td, #container #page_content table.instruments tbody tr.instrument th {
+            heigh: 100px;
+            border: 1px solid green;
+            padding: 5px; }
+            #container #page_content table.instruments tbody tr.instrument td img, #container #page_content table.instruments tbody tr.instrument th img {
+              width: 40px;
+              margin-left: 5px; }
+        #container #page_content table.instruments tbody description {
           padding-left: 2cm; }
-      #container #page_content #instrument_table week {
+      #container #page_content table.instruments week {
         width: 750px; }
     #container #page_content #add_booking {
       display: block; }
@@ -243,6 +246,7 @@ a:visited {
 
 #add_comment {
   position: relative;
+  margin-bottom: 40px;
   margin-left: 160px; }
   #add_comment img {
     width: 400px; }
