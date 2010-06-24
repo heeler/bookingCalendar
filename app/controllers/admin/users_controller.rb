@@ -14,6 +14,8 @@ class Admin::UsersController < ApplicationController
    
    def authorize   
      User.update_all(["authorized=?", true], :id => params[:user_ids])
+     @users_to_notify = User.find(params[:user_ids])
+     @users_to_notify.each {|u| Notifier.deliver_account_authorized(u)}
      redirect_to admin_users_path
    end             
    

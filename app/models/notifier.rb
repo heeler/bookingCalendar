@@ -1,5 +1,12 @@
 class Notifier < ActionMailer::Base
   
+  def account_authorized(user)
+    recipients  user.email
+    from        "msfCalendar@gmail.com"
+    subject     "Your account has been authorized"
+    body        :user => user
+  end
+  
   def booking_canceled(booking)
     recipients  booking.user.email
     from        "msfCalendar@gmail.com"
@@ -17,7 +24,7 @@ class Notifier < ActionMailer::Base
   def booking_confirmation(booking)
     recipients  booking.user.email
     from        "msfCalendar@gmail.com"
-    subject     "RE: Your #{booking.instrument.name} booking details"
+    subject     "Your #{booking.instrument.name} booking details"
     body        :event => booking
   end
 
