@@ -7,7 +7,8 @@ class Admin::UsersController < ApplicationController
    end   
    
    def update
-      User.update( params[:id], :authorized => false )  
+      user_to_notify = User.update( params[:id], :authorized => false )  
+      Notifier.deliver_account_suspended(user_to_notify, current_user)
       redirect_to admin_users_path
    end
    
