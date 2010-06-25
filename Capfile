@@ -15,7 +15,7 @@ namespace :deploy do
 		run "ln -s #{deploy_to}/shared/system/production.sqlite3 #{current_path}/db/"
 		run "rm -rf #{current_path}/config/environments/production.rb"
 		run "ln -s #{deploy_to}/shared/config/production.rb #{current_path}/config/environments/"
-		run "rake jobs:work"
+		run "#{current_path}/script/delayed_job restart"
   end
 
 	 task :start, :roles => :app do
