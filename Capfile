@@ -4,6 +4,10 @@ load 'config/deploy'
 
 after 'deploy:symlink', 'deploy:finishing_touches'
 
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
+
 namespace :deploy do
    task :finishing_touches, :roles => :app do
 		run "rm -rf #{current_path}/vendor/plugins/open_id_authentication"

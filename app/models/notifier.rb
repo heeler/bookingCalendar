@@ -17,6 +17,7 @@ class Notifier < ActionMailer::Base
   def booking_canceled(booking)
     recipients  booking.user.email
     from        "msfCalendar@gmail.com"
+#    cc          "maltby@cgl.ucsf.edu"
     subject     "RE: Your #{booking.instrument.name} booking canceled"
     body        :event => booking
   end
@@ -31,6 +32,7 @@ class Notifier < ActionMailer::Base
   def booking_confirmation(booking)
     recipients  booking.user.email
     from        "msfCalendar@gmail.com"
+#    cc          "maltby@cgl.ucsf.edu"    
     subject     "Your #{booking.instrument.name} booking details"
     body        :event => booking
   end
@@ -38,6 +40,7 @@ class Notifier < ActionMailer::Base
   def booking_modification(booking)
     recipients  booking.user.email
     from        "msfCalendar@gmail.com"
+#    cc          "maltby@cgl.ucsf.edu"    
     subject     "RE: Your #{booking.instrument.name} booking has been modified."
     body        :event => booking
   end
