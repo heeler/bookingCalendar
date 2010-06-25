@@ -15,7 +15,7 @@ namespace :deploy do
 		run "ln -s #{deploy_to}/shared/system/production.sqlite3 #{current_path}/db/"
 		run "rm -rf #{current_path}/config/environments/production.rb"
 		run "ln -s #{deploy_to}/shared/config/production.rb #{current_path}/config/environments/"
-		run "#{current_path}/script/delayed_job restart"
+
   end
 
 	 task :start, :roles => :app do
@@ -29,6 +29,7 @@ namespace :deploy do
 	 desc "Restart Application"
 	 task :restart, :roles => :app do
 	   run "touch #{current_release}/tmp/restart.txt"
+			run "#{current_path}/script/delayed_job restart"
 	 end
 
 
