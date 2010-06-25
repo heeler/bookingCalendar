@@ -4,10 +4,6 @@ load 'config/deploy'
 
 after 'deploy:symlink', 'deploy:finishing_touches'
 
-after "deploy:stop",    "delayed_job:stop"
-after "deploy:start",   "delayed_job:start"
-after "deploy:restart", "delayed_job:restart"
-
 namespace :deploy do
    task :finishing_touches, :roles => :app do
 		run "rm -rf #{current_path}/vendor/plugins/open_id_authentication"
@@ -19,6 +15,7 @@ namespace :deploy do
 		run "ln -s #{deploy_to}/shared/system/production.sqlite3 #{current_path}/db/"
 		run "rm -rf #{current_path}/config/environments/production.rb"
 		run "ln -s #{deploy_to}/shared/config/production.rb #{current_path}/config/environments/"
+		run "#{current_path}/script/delayed_job restart"
   end
 
 	 task :start, :roles => :app do
@@ -36,3 +33,4 @@ namespace :deploy do
 
 
 end
+
