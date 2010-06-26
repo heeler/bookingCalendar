@@ -72,14 +72,10 @@ class EventsController < ApplicationController
   def update
     @instrument = Instrument.find(params[:instrument_id])
     @event = Event.find(params[:id])
-    # puts "AEVENT ID: #{event.id}"
-    # dupoldevent = Event.new(event.attributes)
-    # event.destroy
-    # @event = @instrument.events.new(params[:event])
-    # puts "BEVENT ID: #{@event.id}"    
-    # @event.assign_duration(params[:event])
+    @event.update_attributes(params[:event])
+    @event.assign_duration(params[:event])
     respond_to do |format|
-      if @event.update_attributes(params[:event]) 
+      if @event.save
         flash[:notice] = 'Event was successfully updated.'
         Notifier.deliver_booking_modification(@event)
         format.html { redirect_to instrument_path(@instrument) }

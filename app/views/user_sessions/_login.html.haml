@@ -1,0 +1,27 @@
+- if @myrender
+	- if @openid == true
+		.user_form
+			.form_left
+				.tiny= "example: heeler.myopenid.com"
+		.user_form
+			.form_left
+				= f.label :openid_identifier, "OpenID URL"
+				%br/
+				= f.text_field :openid_identifier, :value => "https://www.google.com/accounts/o8/id"
+	- else
+		.user_form
+			%br/
+			.form_left
+				= f.label :username 
+				%br/
+				= f.text_field :username 
+
+		.user_form
+			.form_left
+				= f.label :password 
+				%br/
+				= f.password_field :password
+
+	.user_form
+		.form_left
+			%p= f.submit "Submit"

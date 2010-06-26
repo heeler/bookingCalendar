@@ -1,0 +1,7 @@
+
+.user_form
+	.form_left
+		%h2= "Select Login Method"
+		%br/
+		= select_tag :username_or_openid, options_for_select(login_options, myselect(@myrender, @openid))
+		= observe_field "username_or_openid", :update => "login_form", :with => "loginmethod", :url => {:controller => :user_sessions, :action => :loginmethod}, :method => :get

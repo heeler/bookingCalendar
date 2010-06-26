@@ -26,9 +26,8 @@
 	%b Ends at:
 	=h @event.end_at  
 %p
-	%b Status:
-	= pending(@event)
-
+	%b Duration:
+	=h distance_of_time_in_words( @event.start_at, @event.end_at )
 
 
 = link_to 'Back', instrument_path(@instrument) 

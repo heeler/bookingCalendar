@@ -1,0 +1,6 @@
+
+
+-form_for @user_session do |f| 
+	= f.error_messages
+	= render :partial => "login_chooser", :locals => {:f => f}
+	= render :partial => "login", :locals => {:f => f}

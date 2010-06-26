@@ -36,4 +36,19 @@ class UsersController < ApplicationController
       end
     end
   end
+  
+  def registrationmethod
+    @myrender = true
+    case params[:loginmethod]
+      when '1'  
+        @open_id = false
+      when '2' 
+        @open_id = true
+      when '0' 
+        @myrender = false
+    end
+    @user = User.new
+    render :partial => "registrationmethod"
+  end
+  
 end

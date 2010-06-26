@@ -14,7 +14,7 @@ ActionController::Routing::Routes.draw do |map|
 #  map.userlist "userlist", :controller => "admin/user_admin", :action => "show"
 #  map.userlistupdate "userlistupdate", :controller => "admin/user_admin", :action => "authorize"
 
-  map.resources :user_sessions
+  map.resources :user_sessions, :collection => {:loginmethod => :get}
   map.resources :users     
   
   map.resource(:admin) do |admin|
