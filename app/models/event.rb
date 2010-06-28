@@ -39,7 +39,7 @@ class Event < ActiveRecord::Base
   end
   
   def title
-    parta = self.start_at.strftime("#{self.user.fullname}: %a at ~%H:%M")
+    parta = self.start_at.strftime("#{self.user.fullname} on #{self.instrument.name}: %a at ~%H:%M")
     partb = ""
     if self.start_at.day == self.end_at.day
       partb = self.end_at.strftime(" to ~%H:%M")
