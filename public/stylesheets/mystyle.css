@@ -170,10 +170,6 @@
       #container #page_content table.adminUser .fullname, #container #page_content table.adminUser .email {
         width: 200px; }
 
-a.ms-1-event-cal-txt {
-  font-family: serif;
-  font-size: 12px; }
-
 a:hover {
   background-color: #2EAC6A;
   color: black; }
@@ -192,9 +188,17 @@ a:visited {
   text-align: center; }
 
 .ec-event-bg {
-  background: gray; }
+  background: gray;
+  font-size: 10px;
+  color: white; }
+  .ec-event-bg a {
+    color: white; }
+  .ec-event-bg a:hover {
+    color: black; }
   .ec-event-bg a:visited {
     color: white; }
+  .ec-event-bg a:visited:hover {
+    color: black; }
 
 .user_form {
   position: relative;
