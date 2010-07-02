@@ -193,6 +193,8 @@ a:visited {
 
 .ec-event-bg {
   background: gray; }
+  .ec-event-bg a:visited {
+    color: white; }
 
 .user_form {
   position: relative;
