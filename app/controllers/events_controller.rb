@@ -46,6 +46,7 @@ class EventsController < ApplicationController
     @instrument = Instrument.find(params[:instrument_id])
     @event = @instrument.events.find(params[:id])
     @day = @day || Time.now.at_midnight
+    @dt = @event.start_at
   end
 
   # POST /events

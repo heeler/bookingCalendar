@@ -27,7 +27,7 @@
 		.project
 			= f.label :start_at
 			%br/
-			= select_tag :my_start_at,  options_for_select(possible_blocks)
+			= select_tag :my_start_at,  (@event.nil?) ? options_for_select(possible_blocks) : options_for_select(possible_blocks, @event.start_at)
 			-# f.datetime_select(:start_at, :minute_step => 15)
 			= observe_field "my_start_at", :update => "event_duration", :with => "time", :url => {:controller => :events, :action => :duration}, :method => :get
 			= observe_field "my_start_at", :update => "hidden_time", :with => "time", :url => {:controller => :events, :action => :time}, :method => :get
@@ -35,7 +35,7 @@
 		.project
 			= f.label :duration
 			%br/
-			= f.select :duration,  options_for_select(orbi_duration(nil))
+			= f.select :duration,  (@event.nil?) ? options_for_select(orbi_duration(nil)) : options_for_select(orbi_duration(@event.start_at))
 		.project318
 			= f.label :etd, "ETD required?"
 			%br/

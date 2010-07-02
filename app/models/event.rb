@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
                                  event["start_at(5i)"].to_i ) 
 
     self.start_at = mtime
-    self.end_at = mtime + event[:duration].to_i.hours
+    self.end_at = mtime + event[:duration].to_i.hours - 1
   end
   
   def duration=(d)
@@ -35,16 +35,16 @@ class Event < ActiveRecord::Base
   end
   
   def name
-    self.user.username + "  #{self.start_at.hour} -> #{self.end_at.hour}"
+    self.user.username + "  #{self.start_at.hour} -> #{(self.end_at + 1 ).hour }"
   end
   
   def title
-    parta = self.start_at.strftime("#{self.user.fullname} on #{self.instrument.name}: %a at ~%H:%M")
+    parta = self.start_at.strftime("#{self.user.fullname} on #{self.instrument.name}: %a at %H:%M")
     partb = ""
     if self.start_at.day == self.end_at.day
-      partb = self.end_at.strftime(" to ~%H:%M")
+      partb = self.end_at.strftime(" to %H:%M")
     else
-      partb = self.end_at.strftime(" to %a at ~%H:%M")
+      partb = self.end_at.strftime(" to %a at %H:%M")
     end
     parta + partb
   end
