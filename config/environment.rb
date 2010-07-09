@@ -22,6 +22,10 @@ Rails::Initializer.run do |config|
   config.gem "authlogic-oid", :lib => "authlogic_openid"
   config.gem "ruby-openid", :lib => "openid"
 
+#  config.gem 'rspec',       :lib => false
+#  config.gem 'rspec-rails', :lib => false
+#  config.gem 'shoulda',     :lib => false
+
 #  config.gem "ghazel-daemons", :lib => "daemons"
 #  gem "ghazel-daemons"
 #  require "daemons"

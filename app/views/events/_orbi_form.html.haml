@@ -2,7 +2,6 @@
 	= f.error_messages 
 	= hidden_field_tag  'event[user_id]', (@event.user_id) ? @event.user_id : current_user.id 
 	= hidden_field_tag 'event[approved]', false
-	#hidden_time
 	.user_form
 		.project
 			= f.label :project, "Project #"
@@ -12,12 +11,13 @@
 			= f.label :project_pi, "Project P.I." 
 			%br/
 			= f.text_field :project_pi, :value => ((@event.project_pi) ? @event.project_pi : "BURLINGAME" )
-		- if not_already_checked(@event)
-			.project318
-				= f.check_box :al_approved
-				= f.label :al_approved, "Burlingame Approved"
-				%br/
-				= " and Project Request Form submitted?"
+	.user_form
+		.project
+		.project318
+			= f.check_box "al_approved"
+			= f.label :al_approved, "Burlingame Approved"
+			%br/
+			= " and Project Request Form submitted?"
 	.user_form_description
 		.project
 			= f.label :description 
@@ -27,10 +27,8 @@
 		.project
 			= f.label :start_at
 			%br/
-			= select_tag :my_start_at,  (@event.nil?) ? options_for_select(possible_blocks) : options_for_select(possible_blocks, @event.start_at)
-			-# f.datetime_select(:start_at, :minute_step => 15)
-			= observe_field "my_start_at", :update => "event_duration", :with => "time", :url => {:controller => :events, :action => :duration}, :method => :get
-			= observe_field "my_start_at", :update => "hidden_time", :with => "time", :url => {:controller => :events, :action => :time}, :method => :get
+			= f.select :start_at,  (@event.start_at.nil?) ? options_for_select(possible_blocks) : options_for_select(possible_blocks, @event.start_at)
+			= observe_field "event_start_at", :update => "event_duration", :with => "time", :url => {:controller => :events, :action => :duration}, :method => :get
 	.user_form
 		.project
 			= f.label :duration
@@ -41,5 +39,8 @@
 			%br/
 			= f.check_box :etd
 	%br/
-			
-	= f.submit 'Create / Update'
+	.user_form
+		.project
+			= f.submit 'Create / Update'
+		.project318
+			= link_to "Cancel / Back to #{@instrument.name} Calendar", instrument_path(@instrument) 

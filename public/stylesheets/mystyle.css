@@ -111,7 +111,9 @@
     padding-top: 1cm; }
     #container #page_content h1 {
       text-align: left;
-      padding-left: 4cm; }
+      padding-left: 3cm;
+      margin-left: 35px;
+      margin-right: 195px; }
     #container #page_content table.instruments {
       border: collapse;
       width: 700px;
@@ -121,12 +123,15 @@
         width: 200px; }
       #container #page_content table.instruments .status {
         width: 50px; }
-      #container #page_content table.instruments thead {
+      #container #page_content table.instruments thead, #container #page_content table.instruments tfoot {
         background-color: #2EAC6A;
         color: white; }
-        #container #page_content table.instruments thead th {
+        #container #page_content table.instruments thead th, #container #page_content table.instruments tfoot th {
           font-weight: bold;
           padding: 5px; }
+        #container #page_content table.instruments thead a, #container #page_content table.instruments tfoot a {
+          color: white;
+          padding-left: 5px; }
       #container #page_content table.instruments tbody {
         border: 1px solid green; }
         #container #page_content table.instruments tbody .alt {
@@ -169,6 +174,26 @@
         width: 100px; }
       #container #page_content table.adminUser .fullname, #container #page_content table.adminUser .email {
         width: 200px; }
+    #container #page_content .angry {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      border-style: inset;
+      border-color: red;
+      border-width: 5px; }
+    #container #page_content .inst_form {
+      margin-left: 40px; }
+    #container #page_content .rules {
+      margin-left: 40px;
+      margin-right: 200px; }
+      #container #page_content .rules h2 {
+        color: red; }
+      #container #page_content .rules h3 {
+        text-align: justify; }
+        #container #page_content .rules h3 p {
+          padding-bottom: 10px; }
+    #container #page_content .booking_form {
+      margin-left: 80px;
+      margin-top: 20px; }
 
 a:hover {
   background-color: #2EAC6A;
@@ -238,12 +263,11 @@ a:visited {
   height: 2.5cm; }
 
 .project {
-  position: absolute;
-  left: 1cm; }
+  position: absolute; }
 
 .project318 {
   position: relative;
-  left: 6cm;
+  left: 5cm;
   width: 6cm; }
 
 .checkbox_holder {

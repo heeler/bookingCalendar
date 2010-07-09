@@ -11,11 +11,13 @@
 			= f.label :project_pi, "Project P.I." 
 			%br/
 			= f.text_field :project_pi, :value => ((@event.project_pi) ? @event.project_pi : "BURLINGAME" )
-			- if not_already_checked(@event)
-				= f.check_box :al_approved
-				= f.label :al_approved, "Burlingame Approved"
-				%br/
-				= " and Project Request Form submitted?"
+	.user_form
+		.project
+		.project318
+			= f.check_box :al_approved
+			= f.label :al_approved, "Burlingame Approved"
+			%br/
+			= " and Project Request Form submitted?"
 	.user_form_description
 		.project
 			= f.label :description 
@@ -33,7 +35,8 @@
 			%br/
 			= f.select :duration,  options_for_select(possible_duration)
 	%br/
-			
-	= f.submit 'Create / Update'
-
-	
+	.user_form
+		.project
+			= f.submit 'Create / Update'
+		.project318
+			= link_to "Cancel / Back to #{@instrument.name} Calendar", instrument_path(@instrument)

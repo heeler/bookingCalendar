@@ -5,13 +5,26 @@
 		Users Awaiting Authorization
 
 	%table.adminUser
+		%thead
+			%tr
+				%th.checkbox
+					MSF
+				%th.checkbox
+					Walkup
+				%th.username
+					Username
+				%th.fullname
+					Fullname
+				%th.email
+					E-mail
 		%tfoot
 			%tr
 				%td= submit_tag "submit"
 		%tbody
 		- for user in @unauthorized_users  
 			%tr
-				%td.checkbox= check_box_tag "user_ids[]", user.id
+				%td.checkbox= check_box_tag "authorize_user_ids[]", user.id
+				%td.checkbox= check_box_tag "walkup_user_ids[]", user.id
 				%td.username= h user.username
 				%td.fullname= h user.fullname
 				%td.email= h user.email  
@@ -20,10 +33,23 @@
 	Authorized Users
 
 %table.adminUser
+	%thead
+		%tr
+			%th
+				Suspend
+			%th
+				Type
+			%th
+				Username
+			%th
+				Fullname
+			%th
+				E-mail
 	%tbody
 	- for user in @authorized_users  
 		%tr
 			%td.checkbox= link_to "S", admin_user_path(user.id), :method => :put, :class => "checkbox"
+			%td.username= (user.authorized) ? "MSF" : "Walkup"
 			%td.username= h user.username
 			%td.fullname= h user.fullname
 			%td.email= h user.email  

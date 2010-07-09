@@ -5,7 +5,6 @@ module ApplicationHelper
     !(@title.nil? || @title.empty?)
   end
   
-
   
   def logged_in?
     !(current_user.nil?)
@@ -14,6 +13,11 @@ module ApplicationHelper
   def authorized?
      return false if current_user.nil?
      current_user.authorized
+  end
+  
+  def walkup_ok?
+    return false if current_user.nil?
+    current_user.walkup
   end
   
   def authorized_to_edit?( user_id )

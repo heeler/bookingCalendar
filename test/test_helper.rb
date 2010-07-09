@@ -1,8 +1,21 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
+require "authlogic/test_case" # include at the top of test_helper.rb
+ 
 
 class ActiveSupport::TestCase
+  
+  @@event_default_values = {
+    :user_id => 1,
+    :project => "88888",
+    :project_pi => "Burlingame",
+    :al_approved => true,
+    :description => "This is a test example",
+    :start_at => "2010-07-07 16:00:00",
+    :duration => 28800
+  }
+  
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
   # test database remains unchanged so your fixtures don't have to be reloaded
@@ -35,4 +48,16 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  
+  def deny(condition, message)
+    assert !condition, message
+  end
+  
+  def assert_all_assigned(*vars)
+    vars.each do |var|
+      assert assigns(var), "@#{var.to_s} was not assigned"
+    end
+      
+  end
+  
 end

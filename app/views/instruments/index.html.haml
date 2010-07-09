@@ -12,13 +12,18 @@
 	%tfoot
 		%tr
 			%td
-				= link_to 'New instrument', new_instrument_path if admin?
+				- if authorized?
+					= link_to "Calendar of all instruments", calendar_path(Time.now.year,Time.now.month)
+			%td
+				= link_to 'Add a new instrument', new_instrument_path if admin?
+			%td
 	%tbody	
 		- @instruments.each_with_index do |inst,ind| 
-			%tr.instrument{ :class => (ind.odd?) ? "alt" : ""}
-				%td
-					= link_to h(inst.name), instrument_path(inst)
-				%td
-					=h inst.model
-				%td.status
-					= (inst.working) ? "Online" : "Offline"
+			- if authorized? || ( walkup_ok? && !inst.msf_only )
+				%tr.instrument{ :class => (ind.odd?) ? "alt" : ""}
+					%td
+						= link_to h(inst.name), instrument_path(inst)
+					%td
+						=h inst.model
+					%td.status
+						= (inst.working) ? "Online" : "Offline"

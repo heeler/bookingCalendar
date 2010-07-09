@@ -11,7 +11,8 @@ module EventsHelper
   
   
   def possible_duration
-    ans = 1.upto(24).inject({}) {|res, i| res[(i*2).to_s + " hours"] = i*2; res }
+    max_hours = (admin?) ? 72 : 24
+    ans = 1.upto(max_hours).inject({}) {|res, i| res[(i*2).to_s + " hours"] = (i*2).hours; res }
   end
   
   def possible_extention
@@ -23,12 +24,7 @@ module EventsHelper
   def pending(event)
     (event.approved) ? "approved" : "pending"
   end    
-  
-  def not_already_checked(event)
-    return true if event.nil?
-    return true if event.al_approved.nil?
-    (event.al_approved != true) 
-  end                                
+                           
   
   def possible_blocks
     time = Time.now.at_midnight
@@ -67,21 +63,21 @@ module EventsHelper
     ans = {}
     case dt.to_date.cwday
     when 1..4
-      ans["16 hours"] = 16 if dt.hour == 16
-      ans["8 hours"] = 8
+      ans["16 hours"] = 16.hours if dt.hour == 16
+      ans["8 hours"] = 8.hours
     when 5
-      ans["20 hours"] = 20 if dt.hour == 16
-      ans["10 hours"] = 10 
+      ans["20 hours"] = 20.hours if dt.hour == 16
+      ans["10 hours"] = 10.hours 
     when 6
       if dt.hour == 2
-        ans["10 hours"] = 11
+        ans["11 hours"] = 11.hours
       else
-        ans["22 hours"] = 22 if dt.hour == 12
-        ans["11 hours"] = 11
+        ans["22 hours"] = 22.hours if dt.hour == 12
+        ans["11 hours"] = 11.hours
       end
     when 7
-      ans["22 hours"] = 22 if dt.hour == 10
-      ans["11 hours"] = 11
+      ans["22 hours"] = 22.hours if dt.hour == 10
+      ans["11 hours"] = 11.hours
     end
     ans
   end

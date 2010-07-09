@@ -1,10 +1,16 @@
+
+
 %h1= h("#{@instrument.name} Booking").titleize
 
-%h3=h "Dave requests you speak with him before making a booking. Thank you."
-%br/
-- if @instrument.orbitrap
-	= render :partial => 'orbi_form'
-- else
-	= render :partial => 'form' 
+.booking_form
+	%h3= @instrument.booking_message
+	%br/
+	- if @instrument.orbitrap
+		= render :partial => 'orbi_form'
+	- else
+		= render :partial => 'form' 
 
-= link_to 'Back', instrument_path(@instrument) 
+- unless @instrument.rules.empty?
+	%h1.angry= ("Booking Rules").titleize
+.rules
+	%h3= @instrument.rules

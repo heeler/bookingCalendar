@@ -3,6 +3,9 @@ class Event < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :instrument
+
+  attr_accessor :al_approved
+
   named_scope :between, lambda {|hash| { :conditions => ['start_at between ? and ?', hash[:start], hash[:end] ] } }
   named_scope :current_user_events, lambda { |hash| { :conditions => ['(start_at between ? and ? OR end_at between ? and ?) and user_id == ?',
                                               hash[:date], hash[:date] + 7, hash[:date], hash[:date] + 7, hash[:user_id]] } }  
@@ -14,24 +17,16 @@ class Event < ActiveRecord::Base
   validate :orbitrap_rules_satisfied
   #validate :orbi_quota_ok
   
-  def assign_duration(event)
-    mtime = Time.local(event["start_at(1i)"].to_i, event["start_at(2i)"].to_i, 
-                                 event["start_at(3i)"].to_i,
-                                 event["start_at(4i)"].to_i, 
-                                 event["start_at(5i)"].to_i ) 
-
-    self.start_at = mtime
-    self.end_at = mtime + event[:duration].to_i.hours - 1
-  end
+  # def end_at
+  #   if self.duration.nil?
+  #     return self.end_at
+  #   else
+  #     return self.start_at + self.duration - 1
+  #   end
+  # end
   
-  def duration=(d)
-    return if self.start_at.nil?
-    self.end_at = self.start_at + d.to_i.hours
-  end
-  
-  def duration
-    return 0 if self.start_at.nil? | self.end_at.nil?
-    self.end_at - self.start_at
+  def duration_in_hours
+    (self.duration/3600).to_i 
   end
   
   def name
@@ -50,6 +45,45 @@ class Event < ActiveRecord::Base
   end
   
 
+  def in_progress?
+    time_now = DateTime.now.in_time_zone
+    dstart = self.start_at.to_datetime.in_time_zone
+    dend = self.end_at.to_datetime.in_time_zone
+    #puts "[#{dstart} < #{time_now} < #{dend}]"
+    return false if datetime_less_than( dend, time_now.in_time_zone )
+    return false if datetime_less_than( time_now.in_time_zone, dstart)
+    true
+  end
+  
+  def datetime_less_than(a,b)
+     # is a < b
+     ((b <=> a) > 0)
+  end
+  
+  def color
+    color = self.user.color
+    color = "009999" if color.nil?
+    color = rand(0xffffff).to_s(16) if color == "009999"
+    return "\##{color}"
+  end
+  
+
+
+  def not_already_booked
+    events = Event.find_all_by_instrument_id(self.instrument_id)
+    conflict = nil
+    ans = events.inject(false) do |res, val| # res = res || val.overlap?(self);   }
+      conflict = val if val != self && val.overlap?(self)
+      res | val.overlap?(self);  
+    end
+
+    if ans
+      estr = "Scheduling conflict: Prior conflicting Booking.\n\t #{conflict.user.username}: #{conflict.start_at} -> #{conflict.end_at}"
+      errors.add_to_base(estr)
+    end
+    (!ans)
+  end  
+  
   def orbitrap_rules_satisfied
     return true unless self.instrument.orbitrap
     
@@ -68,7 +102,7 @@ class Event < ActiveRecord::Base
         if self.duration > 16.hours
           errors.add_to_base("Standard weeknight booking are not permited to be longer than 16 hours.")
           return false
-        elsif self.end_at.hour > 8
+        elsif (self.end_at + 1).hour > 8 # the + 1 is critical for the bookings that end at 23:59:59
           errors.add_to_base("Standard weeknight booking must conclude by 8am. To circumvent this you must elect a 2 week booking.")
           return false
         end
@@ -103,6 +137,51 @@ class Event < ActiveRecord::Base
     end
     
   end
+
+  def extend_booking(time_s)
+    time = time_s.to_i
+    all_events = Event.find_all_by_instrument_id(self.instrument_id)
+    events_after = all_events.find_all do |e| 
+      #puts "starts: #{self.start_at} -- #{e.start_at} :  #{datetime_less_than(self.start_at, e.start_at)}" 
+      datetime_less_than(self.start_at, e.start_at )
+    end
+    events_after.sort! {|a,b| a.start_at <=> b.start_at }
+    events_after.each {|e| puts e.start_at }
+    changed = []
+    unless events_after.empty?
+      ntime = time.to_f.hours - (events_after[0].start_at - self.end_at) 
+      extend(ntime, events_after, changed)
+    end
+    self.end_at += time.to_f.hours
+    self.save(false)
+    puts "self.end_at > #{self.end_at} \t #{time}"
+    changed
+  end 
+  
+  def extend(timeshift, events_after, changed_events)
+    puts "timeshift: #{timeshift}"
+    return if timeshift < 0
+    event = events_after.shift
+    changed_events << event
+    unless events_after.empty?
+      deltatime = events_after[0].start_at - event.end_at
+      extend(timeshift - deltatime ,events_after, changed_events)
+    end
+    event.start_at += timeshift # no .hours here or it multiplies them by 60 again screwing up the calc
+    event.end_at += timeshift
+    event.save(false)
+  end
+
+  def overlap?( event )
+    return false if event.id == self.id
+    dstart = self.start_at.to_datetime.in_time_zone
+    dend = self.end_at.to_datetime.in_time_zone
+    return false if datetime_less_than( dend, event.start_at.in_time_zone )
+    return false if datetime_less_than( event.end_at.in_time_zone, dstart)
+    true
+  end
+
+  private
 
   def orbi_quota_ok
     return true unless self.instrument.orbitrap
@@ -168,92 +247,5 @@ class Event < ActiveRecord::Base
     ans  
   end
 
-  def extend_booking(time_s)
-    time = time_s.to_i
-    all_events = Event.find_all_by_instrument_id(self.instrument_id)
-    events_after = all_events.find_all do |e| 
-      #puts "starts: #{self.start_at} -- #{e.start_at} :  #{datetime_less_than(self.start_at, e.start_at)}" 
-      datetime_less_than(self.start_at, e.start_at )
-    end
-    events_after.sort! {|a,b| a.start_at <=> b.start_at }
-    events_after.each {|e| puts e.start_at }
-    changed = []
-    unless events_after.empty?
-      ntime = time.to_f.hours - (events_after[0].start_at - self.end_at) 
-      extend(ntime, events_after, changed)
-    end
-    self.end_at += time.to_f.hours
-    self.save(false)
-    puts "self.end_at > #{self.end_at} \t #{time}"
-    changed
-  end 
-  
-  def extend(timeshift, events_after, changed_events)
-    puts "timeshift: #{timeshift}"
-    return if timeshift < 0
-    event = events_after.shift
-    changed_events << event
-    unless events_after.empty?
-      deltatime = events_after[0].start_at - event.end_at
-      extend(timeshift - deltatime ,events_after, changed_events)
-    end
-    event.start_at += timeshift # no .hours here or it multiplies them by 60 again screwing up the calc
-    event.end_at += timeshift
-    event.save(false)
-  end
-
-  def overlap?( event )
-    return false if event.id == self.id
-    dstart = self.start_at.to_datetime.in_time_zone
-    dend = self.end_at.to_datetime.in_time_zone
-    return false if datetime_less_than( dend, event.start_at.in_time_zone )
-    return false if datetime_less_than( event.end_at.in_time_zone, dstart)
-    true
-  end
-
-  def in_progress?
-    time_now = DateTime.now.in_time_zone
-    dstart = self.start_at.to_datetime.in_time_zone
-    dend = self.end_at.to_datetime.in_time_zone
-    #puts "[#{dstart} < #{time_now} < #{dend}]"
-    return false if datetime_less_than( dend, time_now.in_time_zone )
-    return false if datetime_less_than( time_now.in_time_zone, dstart)
-    true
-  end
-  
-  def datetime_less_than(a,b)
-     # is a < b
-     ((b <=> a) > 0)
-  end
-  
-  def color
-    color = self.user.color
-    color = "009999" if color.nil?
-    #color = rand(0xffffff).to_s(16) #if color.nil? || color.empty?
-    return "\##{color}"
-  end
-  # 
-  # def colorrgb
-  #   colorarr = [46, 172, 106]
-  #   colorarr = self.user.color.scan(/../).map {|color| color.to_i(16)} unless self.user.color.nil?
-  #   "rgb( #{colorarr.join(', ') }"
-  # end
-  
-  def not_already_booked
-    events = Event.find_all_by_instrument_id(self.instrument_id)
-    conflict = nil
-    ans = events.inject(false) do |res, val| # res = res || val.overlap?(self);   }
-      conflict = val if val.overlap?(self)
-      res | val.overlap?(self);  
-    end
-
-    if ans
-      estr = "Scheduling conflict: Prior conflicting Booking.\n\t #{conflict.user.username}: #{conflict.start_at} -> #{conflict.end_at}"
-      errors.add_to_base(estr)
-    end
-    (!ans)
-  end
-  
-  
   
 end

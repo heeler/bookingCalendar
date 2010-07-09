@@ -26,11 +26,19 @@ class Orbibook
       return 1 if time.hour <  16 #weekday
       return 2 if time.hour >= 16 #weeknight
     when 2..4
-      return 1 if time.hour <  16 #weekday
-      return 2 if time.hour >= 16 #weeknight
+      if time.hour <  16 && time.hour >= 8 #weekday
+        return 1
+      else 
+        return 2 if time.hour >= 16 #weeknight
+      end
     when 5
-      return 1 if time.hour <  16 #weekday
-      return (withinThurs ? 6 : 3) if time.hour >= 16 
+      if time.hour <  16 && time.hour >= 8 #weekday THIS CONDITION 
+        return 1 
+      elsif withinThurs
+        return 6 #last minute weekend booking
+      else
+        return 3
+      end
     when 6
       return (withinThurs ? 6 : 3) if time.hour <  12
       return (withinThurs ? 6 : 4) if time.hour >= 12

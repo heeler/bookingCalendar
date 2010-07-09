@@ -45,11 +45,19 @@ module EventCalendar
     
     # Get the events overlapping the given start and end dates
     def events_for_date_range(start_d, end_d)
-      self.find(
+      my_start_d = start_d - 7
+      evnts = self.find(
         :all,
-        :conditions => [ '(? <= end_at) AND (start_at < ?)', start_d.to_time.utc, end_d.to_time.utc ],
+        :conditions => [ '(start_at > ?) OR (start_at < ?)', my_start_d.to_time.utc, end_d.to_time.utc ],
         :order => 'start_at ASC'
       )
+      evnts.select {|ev| start_d.to_time <= ev.end_at }
+      
+      # self.find(
+      #   :all,
+      #   :conditions => [ '(? <= end_at) AND (start_at < ?)', start_d.to_time.utc, end_d.to_time.utc ],
+      #   :order => 'start_at ASC'
+      #)
     end
     
     # Create the various strips that show evetns

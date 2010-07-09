@@ -1,19 +1,7 @@
 class EventsController < ApplicationController           
   before_filter :logged_in
-  before_filter :check_authorized, :except => [:index]
-  before_filter :my_time_to_event_time, :only => [:create, :update]
-  # GET /events
-  # GET /events.xml
-  def index
-    # @instrument = Instrument.find(params[:instrument_id]) 
-    @events = Event.starting_after(Time.now.at_midnight)
-    @pending_events = @events.find_all_by_approved(false)
-    @approved_events = @events.find_all_by_approved(true)
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @events }
-    end
-  end
+  before_filter :check_authorized
+
 
   # GET /events/1
   # GET /events/1.xml
@@ -54,11 +42,10 @@ class EventsController < ApplicationController
   def create
     @instrument = Instrument.find(params[:instrument_id])    
     @event = @instrument.events.new(params[:event])
-    @event.assign_duration(params[:event])
     respond_to do |format|
       if @event.save
         flash[:notice] = 'Event was successfully created.'
-        Notifier.deliver_booking_confirmation(@event)
+      #  Notifier.deliver_booking_confirmation(@event)
         format.html { redirect_to instrument_path(@instrument) }
         format.xml  { render :xml => @event, :status => :created, :location => @event }
       else
@@ -73,10 +60,9 @@ class EventsController < ApplicationController
   def update
     @instrument = Instrument.find(params[:instrument_id])
     @event = Event.find(params[:id])
-    @event.update_attributes(params[:event])
-    @event.assign_duration(params[:event])
+
     respond_to do |format|
-      if @event.save
+      if @event.update_attributes(params[:event])
         flash[:notice] = 'Event was successfully updated.'
         Notifier.deliver_booking_modification(@event)
         format.html { redirect_to instrument_path(@instrument) }
@@ -135,17 +121,6 @@ class EventsController < ApplicationController
   end
   
   private
-  
-  def my_time_to_event_time
-    unless params[:event].has_key?("start_at(1i)")
-      time = Time.parse(params[:my_start_at])
-      params[:event]["start_at(1i)"] = time.year.to_s 
-    	params[:event]["start_at(2i)"] = time.month.to_s
-    	params[:event]["start_at(3i)"] = time.day.to_s
-    	params[:event]["start_at(4i)"] = time.hour.to_s
-    	params[:event]["start_at(5i)"] = time.min.to_s
-    end
-  end
 
   def check_authorized
     redirect_to instruments_path unless authorized_user
