@@ -1,13 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-
 ltq_orbitrap:
   id: 1
   name: LTQ-Orbitrap
   model: Thermo Orbitrap
   description: high mass accuracy / ETD. Priority for ETD and HCV 
   working: true
-  quota_hours: 16
 
 ltq_ft:
   id: 3
@@ -15,7 +13,6 @@ ltq_ft:
   model: Thermo LTQ-FT
   description:  very high mass accuracy
   working: true
-  quota_hours: 40
   
 ltq:
   id: 5
@@ -23,7 +20,6 @@ ltq:
   model: LTQ
   description: unit mass accuracy
   working: true
-  quota_hours: 40
   
 qstar_elite:
   id: 7
@@ -31,7 +27,6 @@ qstar_elite:
   model: QSTAR-Elite
   description: Q-TOF 
   working: true
-  quota_hours: 40  
   
 qstar_pulsar:
   id: 9
@@ -39,7 +34,6 @@ qstar_pulsar:
   model: QSTAR-Pulsar
   description: Q-TOF 
   working: true
-  quota_hours: 40  
   
 destr:
   id: 13
@@ -47,7 +41,6 @@ destr:
   model: MALDI-TOF
   description: Quick MALDI analysis instrument
   working: false
-  quota_hours: 40
     
 akta:
   id: 17
@@ -55,6 +48,5 @@ akta:
   model: AKTA FPLC
   description: FPLC / HPLC 
   working: true
-  quota_hours: 40  
   
   

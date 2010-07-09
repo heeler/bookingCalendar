@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   validates_acceptance_of :al_approved, :accept => true, :message => 'ALL PROJECTS ESPECIALLY 318 REQIRE AUTHORIZATION BY AL BURLINGAME'
   validate :not_already_booked 
   validate :orbitrap_rules_satisfied
-  #validate :orbi_quota_ok
+
   
   # def end_at
   #   if self.duration.nil?
@@ -185,7 +185,6 @@ class Event < ActiveRecord::Base
 
   def orbi_quota_ok
     return true unless self.instrument.orbitrap
-    return true if self.user.quota_multiplier == 0
     return true if Orbibook.classify_time(self.start_at) == Orbibook::WEEKENDLastMinute
     
     date = self.start_at.at_midnight + 8.hours #monday at 8am new week starts so set time to 8
@@ -213,7 +212,6 @@ class Event < ActiveRecord::Base
   end
 
   def within_quota
-    return true if self.user.quota_multiplier == 0
     date = self.start_at.at_midnight
     date -= 1.days until date.to_date.cwday == 1 # compute monday of the week of the booking
     current_events = Event.current_user_events({:date => date.to_date, :user_id => self.user_id})
@@ -239,7 +237,7 @@ class Event < ActiveRecord::Base
     puts "!!!!1:  #{summed_time.hours}"
     summed_time += self.duration
     puts "!!!!2:  #{summed_time.hours}"
-    qtime = self.instrument.quota(self.user.quota_multiplier)
+
     ans = ( summed_time <= qtime.hours )
     errors.add_to_base("This booking would excede your quota of #{qtime} 
     hours per week on this instrument for the week starting #{date.strftime("%a %b %d")}.

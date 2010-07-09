@@ -24,7 +24,7 @@ class InstrumentsControllerTest < ActionController::TestCase
        post :create, :instrument => {
          :id => 20, :name => "AKTA 2",
          :model => "AKTA2 FPLC", :description => "FPLC / HPLC",
-         :working => true, :quota_hours => 40
+         :working => true
         }
      end
    
