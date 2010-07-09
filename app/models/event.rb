@@ -17,11 +17,7 @@ class Event < ActiveRecord::Base
   validate :orbitrap_rules_satisfied
   
   def end_at
-    if self.duration.nil?
-      return self.end_at
-    else
-      return self.start_at + self.duration - 1
-    end
+    return self.start_at + self.duration - 1
   end
   
   def duration_in_hours

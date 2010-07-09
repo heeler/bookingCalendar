@@ -1,4 +1,5 @@
 class CalendarController < ApplicationController
+  before_filter :authorized_users_only
   
   def index
     @month = params[:month].to_i

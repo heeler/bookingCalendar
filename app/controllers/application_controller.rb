@@ -33,8 +33,17 @@ class ApplicationController < ActionController::Base
     return current_user.authorized
   end
   
+  def authorized_users_only
+    redirect_to root_url if current_user.nil? || !current_user.authorized
+  end
+  
+  def msf_or_walkup_user
+    return false if current_user.nil?
+    return current_user.authorized || current_user.walkup
+  end
+  
   def authorized_admin  
-    redirect_to instruments_path unless admin?
+    redirect_to instrument_path unless admin?
   end     
   
   def logged_in

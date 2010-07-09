@@ -8,7 +8,7 @@ ActionController::Routing::Routes.draw do |map|
     instrument.resources :messages
   end          
 
-  map.root :controller => "instruments"
+  map.root :controller => "user_sessions"
   map.login "login", :controller => "user_sessions", :action => "new"
   map.logout "logout", :controller => "user_sessions", :action => "destroy"  
 #  map.userlist "userlist", :controller => "admin/user_admin", :action => "show"

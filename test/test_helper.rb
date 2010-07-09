@@ -10,7 +10,7 @@ class ActiveSupport::TestCase
     :user_id => 1,
     :project => "88888",
     :project_pi => "Burlingame",
-    :al_approved => true,
+    :al_approved => "1",
     :description => "This is a test example",
     :start_at => "2010-07-07 16:00:00",
     :duration => 28800

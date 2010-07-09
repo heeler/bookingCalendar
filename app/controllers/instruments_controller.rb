@@ -1,5 +1,7 @@
 class InstrumentsController < ApplicationController   
-  # before_filter :authorized_admin, :except => [:index, :show]
+  before_filter :logged_in
+  before_filter :authorized_admin, :except => [:index, :show]
+  
   
   # GET /instruments
   # GET /instruments.xml

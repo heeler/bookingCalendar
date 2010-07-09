@@ -30,7 +30,7 @@
 					%d= link_to 'Destroy', instrument_path(@instrument), :confirm => 'Are you sure?', :method => :delete 
 		
 
-- if authorized? && @instrument.working
+- if @instrument.working && (authorized? || ( walkup_ok? && !@instrument.msf_only ))
 	#add_comment
 		= link_to image_tag('newalertbanner.png'), new_instrument_message_path(@instrument)
 	-unless @message.nil?

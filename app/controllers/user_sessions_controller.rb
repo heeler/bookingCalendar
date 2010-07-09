@@ -1,4 +1,9 @@
 class UserSessionsController < ApplicationController
+  
+  def index
+    @day = Time.now
+  end
+  
   def new
     @openid, @myrender = parse_loginmethod(params[:loginmethod])    
     @user_session = UserSession.new
@@ -9,7 +14,7 @@ class UserSessionsController < ApplicationController
     @user_session.save do |result|
       if result
         flash[:notice] = "Successfully logged in."
-        redirect_to root_url
+        redirect_to instruments_url
       else
         @openid, @myrender = parse_loginmethod(params[:loginmethod])
         render :action => 'new'
