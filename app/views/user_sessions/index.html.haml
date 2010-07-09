@@ -1,9 +1,11 @@
 %h1 MSF Booking Website
 
-%h2 This site is for users of the calendar booking system.
+.inst_form
+	%h2 This site is a calendar system for users of the MSF facility at UCSF Mission Bay.
 
-%h2
-	= "If you are a new to the system, please " 
-	= link_to( 'register.', new_user_path )
-	= "otherwise just "
-	= link_to('login', login_path )
+	%h2
+		= "If you are a new to the system, please " 
+		= link_to( 'register', new_user_path )
+		= ", otherwise just "
+		= link_to('login', login_path )
+		= ".  Newly registered accounts will need to be authorized before you can make a booking."

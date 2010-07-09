@@ -181,7 +181,8 @@
       border-color: red;
       border-width: 5px; }
     #container #page_content .inst_form {
-      margin-left: 40px; }
+      margin-left: 40px;
+      margin-right: 200px; }
     #container #page_content .rules {
       margin-left: 40px;
       margin-right: 200px; }
