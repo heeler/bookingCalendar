@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :instrument
 
+  attr_accessor :al_approved
 
   named_scope :between, lambda {|hash| { :conditions => ['start_at between ? and ?', hash[:start], hash[:end] ] } }
   named_scope :current_user_events, lambda { |hash| { :conditions => ['(start_at between ? and ? OR end_at between ? and ?) and user_id == ?',
@@ -14,14 +15,6 @@ class Event < ActiveRecord::Base
   validates_acceptance_of :al_approved, :on => :create, :message => 'ALL PROJECTS ESPECIALLY 318 REQIRE AUTHORIZATION BY AL BURLINGAME'
   validate :not_already_booked 
   validate :orbitrap_rules_satisfied
-
-  def al_approved=(val)
-    @al_approved = val
-  end
-  
-  def al_approved
-    @al_approved
-  end
   
   def end_at
     if self.duration.nil?
