@@ -114,6 +114,9 @@
       padding-left: 3cm;
       margin-left: 35px;
       margin-right: 195px; }
+    #container #page_content .cal_title {
+      margin-left: 80px;
+      margin-right: 100px; }
     #container #page_content table.instruments {
       border: collapse;
       width: 700px;
@@ -241,11 +244,11 @@ a:visited {
     left: 8cm;
     width: 6cm; }
   .user_form #user_session_openid_identifier, .user_form #user_openid_identifier {
-    background: url(http://openid.net/images/login-bg.gif) no-repeat;
     background-color: #FFF;
     color: #000;
     background-position: 0 50%;
-    padding-left: 18px; }
+    padding-left: 18px;
+    background: url(/images/openid_bg.png) no-repeat; }
   .user_form #user_color {
     color: #000;
     background-position: 0 50%;

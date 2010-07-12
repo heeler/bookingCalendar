@@ -57,8 +57,7 @@ class Event < ActiveRecord::Base
   
   def color
     color = self.user.color
-    color = "009999" if color.nil?
-    color = rand(0xffffff).to_s(16) if color == "009999"
+#    color = rand(0xffffff).to_s(16) if color == "009999"
     return "\##{color}"
   end
   

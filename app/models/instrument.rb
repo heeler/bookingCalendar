@@ -3,6 +3,10 @@ class Instrument < ActiveRecord::Base
   has_many :events
   has_many :users, :through => :events
   
+  def self.n_of_instruments
+    @@total_instruments ||= Instrument.all.size
+  end
+  
   def quota(multiplier)
     ans = multiplier * self.quota_hours
     puts "Quota: #{ans} hours"

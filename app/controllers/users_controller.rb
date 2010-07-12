@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-
+  
   def index 
     @users = User.all
   end
 
   def new
     @user = User.new
+    @user.color = RailsExtensions::Colors.hsv_to_hex(rand(0), 0.8, 0.6)[1..7]
   end
   
   def create
@@ -50,5 +51,6 @@ class UsersController < ApplicationController
     @user = User.new
     render :partial => "registrationmethod"
   end
+  
   
 end
