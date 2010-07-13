@@ -1,5 +1,5 @@
 class EventsController < ApplicationController           
-  before_filter :check_authorized
+  before_filter :check_authorized, :except => :duration
 
   def show
     @event = @instrument.events.find(params[:id])
@@ -87,9 +87,9 @@ class EventsController < ApplicationController
   private
 
   def check_authorized
-    @day = @day || Time.now.at_midnight
-    @instrument = Instrument.find(params[:instrument_id])
     redirect_to instruments_path unless authorized_user || (!@instrument.msf_only && current_user.walkup) 
+    @day = @day || Time.now.at_midnight
+    @instrument = @instrument || Instrument.find(params[:instrument_id])
   end
   
 end

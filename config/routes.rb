@@ -21,7 +21,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources(:users, :controller => 'admin/users', :collection => { :authorize => :put })
     admin.resources(:events, :controller => 'admin/events', :collection => { :approve => :put })    
   end
-          
+
+  map.resources :password_resets
 
   # The priority is based upon order of creation: first created -> highest priority.
 
