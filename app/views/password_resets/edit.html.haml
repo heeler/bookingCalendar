@@ -1,0 +1,24 @@
+%h1= "Change Password for #{@user.username}"
+
+- form_for @user, :url => password_reset_path, :method => :put do |f| 
+	= f.error_messages 
+	-# if @user.crypted_password.nil?
+	-#	.form_right
+	-#		= f.label :openid_identifier, "OpenID URL (Optional)"
+	-#		%br/
+	-#		= f.text_field :openid_identifier
+	-#		.tiny= "https://www.google.com/accounts/o8/id"
+	-# else
+	.user_form
+		.user_left
+			= f.label :password 
+			%br/
+			= f.password_field :password 
+	.user_form
+		.user_left
+			= f.label :password_confirmation 
+			%br/
+			= f.password_field :password_confirmation 
+	.user_form
+		.user_left	
+			= f.submit "Update my password and log me in" 

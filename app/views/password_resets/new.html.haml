@@ -1,0 +1,15 @@
+%h1 Forgot Password
+
+Fill out the form below and instructions to reset your password will be emailed to you:<br />
+<br />
+
+- form_tag password_resets_path do 
+	.user_form
+		%br/
+		.form_left
+			= label_tag :email, "Email:" 
+			%br/
+			= text_field_tag :email
+	.user_form
+		.form_left
+			= submit_tag "Reset my password" 
