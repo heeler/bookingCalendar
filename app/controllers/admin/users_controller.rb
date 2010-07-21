@@ -8,7 +8,7 @@ class Admin::UsersController < ApplicationController
    
   def update
     user_to_notify = User.update( params[:id], :authorized => false, :walkup => false )  
-    Notifier.deliver_account_suspended(user_to_notify, current_user)
+    Notifier.delay.deliver_account_suspended(user_to_notify, current_user)
     redirect_to admin_users_path
   end
    
@@ -26,7 +26,7 @@ class Admin::UsersController < ApplicationController
     end
     users_to_notify = [auth_users, walk_users]
     users_to_notify.flatten!.compact!
-    users_to_notify.each {|u| Notifier.deliver_account_authorized(u)}
+    users_to_notify.each {|u| Notifier.delay.deliver_account_authorized(u)}
 
     redirect_to admin_users_path
   end                     

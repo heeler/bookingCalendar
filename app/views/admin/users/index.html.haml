@@ -52,7 +52,7 @@
 			%td.username= (user.authorized) ? "MSF" : "Walkup"
 			%td.username= h user.username
 			%td.fullname= h user.fullname
-			%td.email= link_to user.email, test_email_admin_user_path(user.id)  
+			%td.email= h user.email # link_to user.email, test_email_admin_user_path(user.id)  
 					
 %br/                  
 = link_to "Instrument Bookings", instruments_path
