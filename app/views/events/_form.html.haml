@@ -33,7 +33,7 @@
 		.project
 			= f.label :duration
 			%br/
-			= f.select :duration,  options_for_select(possible_duration)
+			= f.select :duration,  options_for_select(possible_duration, @event.duration)
 	%br/
 	.user_form
 		.project

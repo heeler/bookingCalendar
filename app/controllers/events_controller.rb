@@ -46,7 +46,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update_attributes(params[:event])
         flash[:notice] = 'Event was successfully updated.'
-        Notifier.deliver_booking_modification(@event)
+        Notifier.delay.deliver_booking_modification(@event) unless current_user.id == @event.user_id
         format.html { redirect_to instrument_path(@instrument) }
         format.xml  { head :ok }
       else
@@ -59,7 +59,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event = @instrument.events.find(params[:id])    
-    Notifier.deliver_booking_canceled(@event)
+    Notifier.delay.deliver_booking_canceled(@event) unless current_user.id == @event.user_id
     @event.destroy
     flash[:notice] = 'Booking(s) removed and users notified by email.'
     respond_to do |format|
@@ -76,7 +76,7 @@ class EventsController < ApplicationController
     @event = @instrument.events.find(params[:id])
     if @event.in_progress?
       changed_events = @event.extend_booking(params[:event][:duration])
-      changed_events.each {|ev| Notifier.deliver_instrument_delay(ev) }
+      changed_events.each {|ev| Notifier.delay.deliver_instrument_delay(ev) }
       flash[:notice] = 'Your Booking was extended and others users shifted.'
     else
       flash[:error] = 'Events can only be edited while they are active.'

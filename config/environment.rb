@@ -26,9 +26,9 @@ Rails::Initializer.run do |config|
 #  config.gem 'rspec-rails', :lib => false
 #  config.gem 'shoulda',     :lib => false
 
-#  config.gem "ghazel-daemons", :lib => "daemons"
-#  gem "ghazel-daemons"
-#  require "daemons"
+  # config.gem "ghazel-daemons", :lib => "daemons"
+  # gem "ghazel-daemons"
+  config.gem "daemons"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

@@ -62,7 +62,6 @@ class Event < ActiveRecord::Base
   end
   
 
-
   def not_already_booked
     events = Event.find_all_by_instrument_id(self.instrument_id)
     conflict = nil

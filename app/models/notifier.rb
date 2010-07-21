@@ -1,6 +1,13 @@
 class Notifier < ActionMailer::Base
   default_url_options[:host] = "calendar-msf.ucsf.edu:5150"  
 
+  def mytest(user)
+    recipients  user.email
+    from        "msfCalendar@gmail.com"
+    subject     "Your account has been authorized"
+    body        :user => user
+  end
+
   def password_reset_instructions(user)  
     subject       "Password Reset Instructions"  
     from          "msfCalendar@gmail.com"  

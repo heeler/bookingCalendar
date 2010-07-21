@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :users, :collection => {:registrationmethod => :get}
   
   map.resource(:admin) do |admin|
-    admin.resources(:users, :controller => 'admin/users', :collection => { :authorize => :put })
+    admin.resources(:users, :controller => 'admin/users', :collection => { :authorize => :put}, :member => { :test_email => :get })
     admin.resources(:events, :controller => 'admin/events', :collection => { :approve => :put })    
   end
 

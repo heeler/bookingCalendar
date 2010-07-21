@@ -31,4 +31,11 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end                     
 
+  def test_email
+    @user = User.find(params[:id])
+    Notifier.delay.deliver_mytest(@user)
+#    Notifier.delay.deliver_account_suspended(@user, current_user)
+    redirect_to admin_users_path
+  end
+
 end
