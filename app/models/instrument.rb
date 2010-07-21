@@ -4,7 +4,7 @@ class Instrument < ActiveRecord::Base
   has_many :users, :through => :events
   
   def self.n_of_instruments
-    @@total_instruments ||= Instrument.all.size
+    @@total_instruments ||= count_em
   end
   
   def quota(multiplier)
@@ -24,6 +24,13 @@ class Instrument < ActiveRecord::Base
       return "ms-#{i+1}" if self.id == inst.id
     end
     return "ms-0"
+  end
+  
+  private
+  
+  def self.count_em
+    insts = Instrument.all
+    insts.inject([]) {|a, i| a << i.id }.max
   end
   
 end

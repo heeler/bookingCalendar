@@ -4,8 +4,8 @@ module RailsExtensions
   
     #Instance Method to override color
     def color
-      n_of_i = Instrument.n_of_instruments + 1
-      x = instrument.id
+      n_of_i = Instrument.n_of_instruments + 2
+      x = instrument.id + 1
       h = x.to_f / n_of_i.to_f
       Colors.hsv_to_hex(h, 0.8, 0.6)
     end
