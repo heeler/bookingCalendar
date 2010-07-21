@@ -5,13 +5,13 @@ module RailsExtensions
     #Instance Method to override color
     def color
       n_of_i = Instrument.n_of_instruments + 1
-      x = self.instrument.id
+      x = instrument.id
       h = x.to_f / n_of_i.to_f
       Colors.hsv_to_hex(h, 0.8, 0.6)
     end
     
     def name
-      self.instrument.name
+      "#{project}/#{instrument.name}"
     end
   
   end
