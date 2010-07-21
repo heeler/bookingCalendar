@@ -59,7 +59,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event = @instrument.events.find(params[:id])    
-    Notifier.delay.deliver_booking_canceled(@event) unless current_user.id == @event.user_id
+    Notifier.delay.deliver_booking_canceled(@event.clone) unless current_user.id == @event.user_id
     @event.destroy
     flash[:notice] = 'Booking(s) removed and users notified by email.'
     respond_to do |format|
