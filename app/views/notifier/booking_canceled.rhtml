@@ -1,4 +1,4 @@
-Hi <%= h @event.user.username %>,
-  Unfortunately you're booking on <%= h @event.instrument.name %> has been canceled. The likely reason for this is that the instrument is down. Please talk to Dave if you have any questions. 
+Hi <%= h @user.username %>,
+  Unfortunately you're booking on the <%= h @instrument.name %> at <%= @time %> has been canceled. Please talk to Dave if you have any questions. 
 Thanks,
     Automated booking system mailer 

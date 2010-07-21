@@ -30,12 +30,12 @@ class Notifier < ActionMailer::Base
     body        :user => user, :susp => suspender
   end
   
-  def booking_canceled(booking)
-    recipients  booking.user.email
+  def booking_canceled(user, time, instrument)
+    recipients  user.email
     from        "msfCalendar@gmail.com"
 #    cc          "maltby@cgl.ucsf.edu"
-    subject     "RE: Your #{booking.instrument.name} booking canceled"
-    body        :event => booking
+    subject     "RE: Your #{instrument.name} booking canceled"
+    body        :user => user, :time => time, :instrument => instrument
   end
   
   def instrument_delay(booking)
