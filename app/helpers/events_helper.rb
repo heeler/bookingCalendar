@@ -16,7 +16,7 @@ module EventsHelper
   end
   
   def possible_extention
-    ans = 1.upto(4).inject({}) {|res, i| res[(i).to_s + " hours"] = i; res }
+    ans = 1.upto(8).inject({}) {|res, i| res[(i).to_s + " hours"] = i; res }
     ans = 1.upto(24).inject({}) {|res, i| res[(i*2).to_s + " hours"] = i*2; res } if admin?
     ans
   end

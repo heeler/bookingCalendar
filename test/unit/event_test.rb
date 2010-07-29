@@ -170,6 +170,30 @@ class EventTest < ActiveSupport::TestCase
     assert event.valid?, "Unable to create event:\n#{event.to_yaml}"
   end
   
+  #extend tests
+  test "should_create_bookings_2_hour_ago_for_10_hours_and_extend" do
+    tm = Time.now
+    start_at = tm.at_midnight + tm.hour - 2.hours
+    eventOne = ft_create({:start_at => start_at, :duration => 10.hours })
+    assert eventOne.valid?, "Unable to create event:\n#{eventOne.to_yaml}"
+    start_at += 18.hours
+    eventTwo = ft_create({:start_at => start_at, :duration => 10.hours })
+    assert eventTwo.valid?, "Unable to create second event:\n#{eventTwo.to_yaml}"
+    eventOne.extend_booking(3)
+    assert eventOne.valid?, "Unable to extend:\n#{eventOne.to_yaml}"
+  end
+  
+  test "should_create_bookings_2_hour_ago_for_10_hours_and_extend_longer" do
+    tm = Time.now
+    start_at = tm.at_midnight + tm.hour - 2.hours
+    eventOne = ft_create({:start_at => start_at, :duration => 10.hours })
+    assert eventOne.valid?, "Unable to create event:\n#{eventOne.to_yaml}"
+    start_at += 18.hours
+    eventTwo = ft_create({:start_at => (start_at + 8.hours), :duration => 10.hours })
+    assert eventTwo.valid?, "Unable to create second event:\n#{eventTwo.to_yaml}"
+    eventOne.extend_booking(10)
+    assert eventOne.valid?, "Unable to extend:\n#{eventOne.to_yaml}"
+  end
   
   private
   
@@ -179,6 +203,10 @@ class EventTest < ActiveSupport::TestCase
   
   def elite_create(options={})
     create(options, instruments(:qstar_elite))
+  end
+  
+  def ft_create(options={})
+    create(options, instruments(:ltq_ft))
   end
   
   def create(options,inst)

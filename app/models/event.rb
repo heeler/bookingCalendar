@@ -145,7 +145,7 @@ class Event < ActiveRecord::Base
       ntime = time.to_f.hours - (events_after[0].start_at - self.end_at) 
       extend(ntime, events_after, changed)
     end
-    self.end_at += time.to_f.hours
+    self.duration += time.to_f.hours
     self.save(false)
     puts "self.end_at > #{self.end_at} \t #{time}"
     changed
@@ -160,8 +160,7 @@ class Event < ActiveRecord::Base
       deltatime = events_after[0].start_at - event.end_at
       extend(timeshift - deltatime ,events_after, changed_events)
     end
-    event.start_at += timeshift # no .hours here or it multiplies them by 60 again screwing up the calc
-    event.end_at += timeshift
+    event.start_at += timeshift + 1 # no .hours here or it multiplies them by 60 again screwing up the calc
     event.save(false)
   end
 
