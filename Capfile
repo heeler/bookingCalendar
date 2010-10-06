@@ -29,7 +29,7 @@ namespace :deploy do
 	 desc "Restart Application"
 	 task :restart, :roles => :app do
 	   run "touch #{current_release}/tmp/restart.txt"
-			run "#{current_path}/script/delayed_job restart"
+		#	run "#{current_path}/script/delayed_job restart"
 	 end
 
 

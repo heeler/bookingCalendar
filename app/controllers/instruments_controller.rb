@@ -6,7 +6,7 @@ class InstrumentsController < ApplicationController
   # GET /instruments
   # GET /instruments.xml
   def index
-    @instruments = Instrument.all
+    @instruments = Instrument.all.sort {|a,b| a.name <=> b.name }
 
     respond_to do |format|
       format.html # index.html.erb
