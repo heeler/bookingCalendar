@@ -26,7 +26,7 @@ class Notifier < ActionMailer::Base
   def account_suspended(user, suspender)
     recipients  user.email
     from        "msfCalendar@gmail.com"
-    subject     "Your account has been authorized"
+    subject     "Your account has been suspended"
     body        :user => user, :susp => suspender
   end
   
