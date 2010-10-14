@@ -21,7 +21,7 @@ module ApplicationHelper
   end
   
   def authorized_to_edit?( user_id )
-     return false if !authorized?
+     return false if !authorized? && !walkup_ok?
      return true if admin?      
      return true if( current_user.id == user_id )
      false
