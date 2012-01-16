@@ -5,9 +5,9 @@
 .booking_form
 	%h3= @instrument.booking_message
 	%br/
-	#- if @instrument.orbitrap
-	#	= render :partial => 'orbi_form'
-	#- else
+	-#- if @instrument.orbitrap
+	-#	= render :partial => 'orbi_form'
+	-#- else
 	= render :partial => 'form' 
 
 - unless @instrument.rules.empty?
