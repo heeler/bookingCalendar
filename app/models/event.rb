@@ -14,7 +14,7 @@ class Event < ActiveRecord::Base
   validates_numericality_of :project, :only_integer => true
   validates_acceptance_of :al_approved, :on => :create, :message => 'ALL PROJECTS ESPECIALLY 318 REQIRE AUTHORIZATION BY AL BURLINGAME'
   validate :not_already_booked 
-  validate :orbitrap_rules_satisfied
+#  validate :orbitrap_rules_satisfied
   
   def end_at
     return self.start_at + self.duration - 1
