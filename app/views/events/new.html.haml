@@ -5,10 +5,10 @@
 .booking_form
 	%h3= @instrument.booking_message
 	%br/
-	- if @instrument.orbitrap
-		= render :partial => 'orbi_form'
-	- else
-		= render :partial => 'form' 
+	#- if @instrument.orbitrap
+	#	= render :partial => 'orbi_form'
+	#- else
+	= render :partial => 'form' 
 
 - unless @instrument.rules.empty?
 	%h1.angry= ("Booking Rules").titleize
